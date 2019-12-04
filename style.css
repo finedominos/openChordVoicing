@@ -1,3 +1,9 @@
 h1{
-    background: yellow;
+    text-align: center;
+    background-color: yellow;
+}
+
+div{
+    margin-left: 10%;
+    margin-right: 10%;
 }
