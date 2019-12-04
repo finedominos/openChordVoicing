@@ -6,4 +6,25 @@ h1{
 div{
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 40px;
+}
+
+#upDescription{
+    text-align: center;
+}
+
+#sequenceOfChordsBuilding{
+    border-style:solid;
+    height: 150px;
+}
+
+#sheet{
+    border-style:solid;
+    height: 100px;
+}
+
+
+#keyboard{
+    border-style:solid;
+    height: 100px;
 }
