@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<meta charset="UTF-8" />
 
 <head>
     <title>OpenChordVoicing</title>
@@ -10,19 +11,56 @@
 
     <h1>Open Chord Voicing</h1>
 
-    <div id="upDescription">
+    <div id="upDescription" class="principalDiv">
         <p>Here a bit of text to present the thing</p>
+
     </div>
 
-    <div id="sequenceOfChordsBuilding">
-        chords choice -> GO
+    <div id="sequenceOfChordsBuilding" class="principalDiv">
+        <div id="chordPicking">
+            <select v-model="rootChosen">
+                <option v-for="item in roots">{{item}}</option>
+            </select>
+
+            <select v-model="alterationChosen">
+                <option v-for="item in alterations">{{item}}</option>
+            </select>
+
+            <select v-model="colorChosen">
+                <option v-for="item in colors">{{item}}</option>
+            </select>
+
+
+            <p class="label">seventh :</p>
+            <select v-model="sevenChosen">
+                <option v-for="item in colors">{{item}}</option>
+            </select>
+
+            <p>chord chosen : {{chordPrint}}</p>
+        </div>
+
+        <div class="button">
+            <button v-on:click="addChord()">Add</button>
+            <button v-on:click="reset()">Reset</button>
+        </div>
+        <div id="sequencePrinting">
+            i print the sequence of chords here
+            <p v-for="item in chordSequence">{{item.print}}</p>
+        </div>
+        <div class="button">
+            <button v-on:click="go()">Go</button>
+        </div>
     </div>
 
-    <div id="sheet">beautiful sheet</div>
-    
-    <div id="keyboard">beautiful keyboard</div>
+    <div id="sheet" class="principalDiv">beautiful sheet</div>
+
+    <div id="keyboard" class="principalDiv">beautiful keyboard</div>
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script src="main.js"></script>
 
 </body>
 

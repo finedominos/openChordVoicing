@@ -3,7 +3,7 @@ h1{
     background-color: yellow;
 }
 
-div{
+.principalDiv{
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 40px;
@@ -13,10 +13,28 @@ div{
     text-align: center;
 }
 
+/* Sequence of chords building */
+
 #sequenceOfChordsBuilding{
     border-style:solid;
     height: 150px;
+    display: flex;
+    justify-content: space-around
 }
+
+
+.label{
+    margin-bottom: 0;
+}
+
+#chordPicking{
+    flex-direction: row;
+}
+
+/* end of Sequence of chord building*/
+
+
+
 
 #sheet{
     border-style:solid;
@@ -28,3 +46,4 @@ div{
     border-style:solid;
     height: 100px;
 }
+
