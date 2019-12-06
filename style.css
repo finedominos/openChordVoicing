@@ -31,24 +31,41 @@ h1 {
     flex-direction: row;
 }
 
-
 /* end of Sequence of chord building*/
 
 
-/*sheet CSS*/
+/*SHEET*/
 
+#sheet {
+    border-style: solid;
+    height: 300px;
+}
+
+    /*Input : */
+.ctrl {
+    position: absolute;
+    z-index: 1;
+    width: 80%;
+}
+
+input[name=cmd] {
+    font-size: 1.5em;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+    /*sheet, as an svg object : */
 .svg {
     position: absolute;
-    overflow: hidden;
-    overflow-x: auto;
+    overflow: auto;
     height: 300px;
-    width: 100%;
+    width: 80%;
 }
 
 svg {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 15px;
+    left: 10px;
     right: 0;
     bottom: 0;
     width: 100%;
@@ -61,31 +78,11 @@ svg {
     stroke: none;
 }
 
-.ctrl {
-    position: absolute;
-    z-index: 1;
-    top: 300px;
-    width: 100%;
-}
-
-input[name=cmd] {
-    font-size: 2em;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 #rest {
     stroke: none;
 }
 
-#notes use.playing {
-    stroke: #f00;
-    fill: #f00;
-}
-
-
-/*sharp and stuffs */
-
+    /*sharp and stuffs */
 .note text {
     font-family: serif;
     font-size: 30px;
@@ -94,12 +91,8 @@ input[name=cmd] {
 }
 
 
-/*blabal*/
 
-#sheet {
-    border-style: solid;
-    height: 300px;
-}
+/*KEYBOARD*/
 
 #keyboard {
     border-style: solid;

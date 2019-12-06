@@ -47,38 +47,22 @@ new Vue({
 
 
 //*************************************************************SHEET SECTION*************************************************************//
-const noteLength = 7 / 8
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
 
-const ctrl = (function(ct) {
-        ct = [].slice.call(ct)
-        let ctrl = {}
-        for (const c of ct) ctrl[c.name] = c
-        return ctrl
-    })(document.querySelectorAll('.ctrl [name]'))
-    // const notes = "1234567+1;-(135)(246)(357)(461)(572)(613)(724)+(135)"
+const ctrl = (function (ct) {
+    ct = [].slice.call(ct)
+    let ctrl = {}
+    for (const c of ct) ctrl[c.name] = c
+    return ctrl
+})(document.querySelectorAll('.ctrl [name]'))
+
+// const notes = "1234567+1;-(135)(246)(357)(461)(572)(613)(724)+(135)"
 const notes = '1[351],4565[247],2-7+12[136],11-7#+1-[7#25]+,-7#5'
-    // const rythm = "1-4444888811"
-const baseInterval = [2, 2, 1, 2, 2, 2, 1]
-const delay = 0.1
+// const rythm = "1-4444888811"
 console.log(ctrl)
 
-let interval
-let values
-
-function arrayRotate(arr, count) {
-    count = count % arr.length
-    if (count < 0) arr.unshift(...arr.splice(count))
-    else arr.push(...arr.splice(0, count))
-    return arr
-}
-
 ctrl.cmd.value = notes
-
-function mod(a, b) {
-    return a - b * Math.floor(a / b)
-}
 
 function parseNote(str) {
     // str = str.replace(/\(([^)*|]*)\)/img, (...$) => `[${$[1]}]`)
@@ -96,12 +80,12 @@ function parseNote(str) {
     let lastNote
     for (let n of str) {
         if (n === '+') octave++
-            else if (n === '-' && !chord) octave--
-                else if (n === '[') {
-                    chord = []
-                    octaveGlob = octave
-                    notes.push(chord)
-                } else if (n === ']') {
+        else if (n === '-' && !chord) octave--
+        else if (n === '[') {
+            chord = []
+            octaveGlob = octave
+            notes.push(chord)
+        } else if (n === ']') {
             chord = null
             lastNote = null
             octave = octaveGlob
@@ -125,7 +109,7 @@ function parseNote(str) {
             n--
             if (chord) {
                 if (lastNote && lastNote[0] >= n) octave++
-                    lastNote = [n, octave, 0]
+                lastNote = [n, octave, 0]
                 chord.push(lastNote)
             } else {
                 notes.push([
@@ -159,7 +143,6 @@ function createNote(n, i) {
 let sheet = []
 
 function change() {
-    stop()
     for (const c of sheet) {
         for (const n of c) {
             n.elm.remove()
@@ -178,63 +161,6 @@ function change() {
     document.querySelector('.svg>svg').style.width = `${width + 200}px`
 }
 ctrl.cmd.addEventListener('input', change)
-ctrl.cmd.addEventListener('keydown', e => {
-    console.log(e.which)
-    if (e.which == 13) return play()
-    if (e.which == 27) return stop()
-})
 change()
 
-function stop() {
-    for (const c of sheet) {
-        for (const n of c) {
-            clearTimeout(n.timeoutPlay)
-            clearTimeout(n.timeoutStop)
-            n.elm.classList.remove('playing')
-            n.osc && n.osc.disconnect()
-        }
-    }
-}
-
-function play() {
-    stop()
-    const ct = ac.currentTime
-
-    let i = 0
-    for (const c of sheet) {
-        const startTime = (i * 60) / tempo + delay
-        const stopTime = startTime + (60 * noteLength) / tempo
-        for (const n of c) {
-            if (n.length) {
-                const osc = ac.createOscillator()
-                osc.frequency.value =
-                    440 *
-                    Math.pow(2, (values[n[0]] + 3 + toneOffset + n[2]) / 12 + n[1] - 4)
-                osc.type = 'sawtooth'
-                osc.connect(volume)
-                osc.start(ct + startTime)
-                osc.stop(ct + stopTime)
-                n.osc = osc
-            }
-            n.timeoutPlay = setTimeout(() => {
-                n.elm.classList.add('playing')
-                if (
-                    n.elm.getBoundingClientRect().right - document.body.offsetWidth >
-                    0
-                ) {
-                    n.elm.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start',
-                        inline: 'start',
-                    })
-                }
-            }, startTime * 1000)
-            n.timeoutStop = setTimeout(
-                () => n.elm.classList.remove('playing'),
-                stopTime * 1000,
-            )
-        }
-        i++
-    }
-}
 //************************************************************END OF SHEET SECTION*************************************************************//
