@@ -1,49 +1,107 @@
-h1{
+h1 {
     text-align: center;
     background-color: yellow;
 }
 
-.principalDiv{
+.principalDiv {
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 40px;
 }
 
-#upDescription{
+#upDescription {
     text-align: center;
 }
 
+
 /* Sequence of chords building */
 
-#sequenceOfChordsBuilding{
-    border-style:solid;
+#sequenceOfChordsBuilding {
+    border-style: solid;
     height: 150px;
     display: flex;
     justify-content: space-around
 }
 
-
-.label{
+.label {
     margin-bottom: 0;
 }
 
-#chordPicking{
+#chordPicking {
     flex-direction: row;
 }
+
 
 /* end of Sequence of chord building*/
 
 
+/*sheet CSS*/
 
+.svg {
+    position: absolute;
+    overflow: hidden;
+    overflow-x: auto;
+    height: 300px;
+    width: 100%;
+}
 
-#sheet{
-    border-style:solid;
-    height: 100px;
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    stroke-width: 2;
+    stroke: #000;
+}
+
+.clef {
+    stroke: none;
+}
+
+.ctrl {
+    position: absolute;
+    z-index: 1;
+    top: 300px;
+    width: 100%;
+}
+
+input[name=cmd] {
+    font-size: 2em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#rest {
+    stroke: none;
+}
+
+#notes use.playing {
+    stroke: #f00;
+    fill: #f00;
 }
 
 
-#keyboard{
-    border-style:solid;
-    height: 100px;
+/*sharp and stuffs */
+
+.note text {
+    font-family: serif;
+    font-size: 30px;
+    font-weight: normal;
+    stroke: none;
 }
 
+
+/*blabal*/
+
+#sheet {
+    border-style: solid;
+    height: 300px;
+}
+
+#keyboard {
+    border-style: solid;
+    height: 100px;
+}
