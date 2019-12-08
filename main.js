@@ -50,7 +50,7 @@ new Vue({
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
 
-const ctrl = (function (ct) {
+const ctrl = (function(ct) {
     ct = [].slice.call(ct)
     let ctrl = {}
     for (const c of ct) ctrl[c.name] = c
@@ -59,7 +59,7 @@ const ctrl = (function (ct) {
 
 // const notes = "1234567+1;-(135)(246)(357)(461)(572)(613)(724)+(135)"
 const notes = '1[351],4565[247],2-7+12[136],11-7#+1-[7#25]+,-7#5'
-// const rythm = "1-4444888811"
+    // const rythm = "1-4444888811"
 console.log(ctrl)
 
 ctrl.cmd.value = notes
@@ -80,12 +80,12 @@ function parseNote(str) {
     let lastNote
     for (let n of str) {
         if (n === '+') octave++
-        else if (n === '-' && !chord) octave--
-        else if (n === '[') {
-            chord = []
-            octaveGlob = octave
-            notes.push(chord)
-        } else if (n === ']') {
+            else if (n === '-' && !chord) octave--
+                else if (n === '[') {
+                    chord = []
+                    octaveGlob = octave
+                    notes.push(chord)
+                } else if (n === ']') {
             chord = null
             lastNote = null
             octave = octaveGlob
@@ -109,7 +109,7 @@ function parseNote(str) {
             n--
             if (chord) {
                 if (lastNote && lastNote[0] >= n) octave++
-                lastNote = [n, octave, 0]
+                    lastNote = [n, octave, 0]
                 chord.push(lastNote)
             } else {
                 notes.push([
@@ -134,7 +134,7 @@ function createNote(n, i) {
         else if (n[2] < 0) anchor += '-flat'
     }
     note.setAttributeNS(xlinkNS, 'href', anchor)
-    note.setAttribute('x', i * 50)
+    note.setAttribute('x', i * 120)
     if (n.length) note.setAttribute('y', n[0] * -10 - (n[1] - 4) * 10 * 7)
     notesElem.appendChild(note)
     n.elm = note
