@@ -40,7 +40,9 @@ new Vue({
             this.sevenChosen = 'm';
         },
         go() {
-            alert("lets go with a sequence of " + this.chordSequence.length + " chords")
+            // alert("lets go with a sequence of " + this.chordSequence.length + " chords")
+            naive(this.chordSequence);    // from script naive.js
+            
         },
     }
 });
