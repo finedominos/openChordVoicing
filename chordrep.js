@@ -33,16 +33,11 @@ var diatonic = {
     'B': 7
   };
   
-var dchords = {
-    'major': [1, 3, 5],
-    'minor': [1, 3 ,5]
+var chordTypes = {
+    'major': [[1, 3, 5], [1, 5, 8]],
+    'minor': [[1, 3, 5], [1, 4, 8]]
   };
-
-var chchords = {
-    'major': [1, 5, 8],
-    'minor': [1, 4, 8]
-}
-
+  
 function find_val(dict, value){
     arr = [];
     for (d in dict){
@@ -52,3 +47,48 @@ function find_val(dict, value){
     }
     return arr;
 }
+
+function find_note(dnote, chpos){
+    arr = find_val(chromatic, chpos);
+    for (a in arr){
+        //console.log(dnote, arr[a], arr[a].charAt(0));    
+        if (arr[a].charAt(0)==dnote){
+            return arr[a];
+        }
+    }
+}
+
+function make_chord(root, type){
+    chord = [[]];
+    chord[0]=chordTypes[type][0];
+    chord[1]=[];
+    for (pos in chord[0]){
+        newDiatonic = (diatonic[root.charAt(0)] + chord[0][pos] - 1) % 7;
+        if (newDiatonic == 0) newDiatonic = 7;
+        console.log(pos, newDiatonic, find_val(diatonic, newDiatonic));
+        newChromatic = (chromatic[root] + chordTypes[type][1][pos] - 1) % 12;
+        if (newChromatic == 0) newChromatic = 12;
+        newNote = find_note(find_val(diatonic, newDiatonic), newChromatic);
+        console.log(find_val(diatonic, newDiatonic), newChromatic, newNote);
+        chord[1][pos] = newNote;
+    }
+    return chord;
+}
+
+function chordAliette(chord){
+    notesChord = [[]];
+    console.log(notesChord);
+    for (n in chord[1]){
+        alt='';
+        switch (chord[1][n].charAt(1)){
+            case '#': alt = '+1'; break;
+            case 'b': alt = '-1'; break; 
+            default: alt = '0';
+        }
+        notesChord[n] = [chord[1][n].charAt(0), 4, alt]
+    }
+    return notesChord;
+}
+
+
+
