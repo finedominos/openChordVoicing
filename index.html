@@ -31,9 +31,12 @@
             </select>
 
 
-            <p class="label">seventh :</p>
+            <p class="label">seven | ninth</p>
             <select v-model="sevenChosen">
                 <option v-for="item in colors">{{item}}</option>
+            </select>
+            <select v-model="ninthChosen">
+                <option v-for="item in alterations">{{item}}</option>
             </select>
 
             <p>chord chosen : {{chordPrint}}</p>
