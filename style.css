@@ -31,6 +31,7 @@ h1 {
     flex-direction: row;
 }
 
+
 /* end of Sequence of chord building*/
 
 
@@ -41,24 +42,19 @@ h1 {
     height: 300px;
 }
 
-    /*Input : */
+
+/*SHEET */
+
 .ctrl {
     position: absolute;
     z-index: 1;
     width: 80%;
 }
 
-input[name=cmd] {
-    font-size: 1.5em;
-    width: 80%;
-    box-sizing: border-box;
-}
-
-    /*sheet, as an svg object : */
 .svg {
     position: absolute;
     overflow: auto;
-    height: 300px;
+    height: 350px;
     width: 80%;
 }
 
@@ -82,7 +78,6 @@ svg {
     stroke: none;
 }
 
-    /*sharp and stuffs */
 .note text {
     font-family: serif;
     font-size: 30px;
@@ -90,6 +85,8 @@ svg {
     stroke: none;
 }
 
+
+/*END OF SHEET */
 
 
 /*KEYBOARD*/
