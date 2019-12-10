@@ -1,7 +1,18 @@
+//***********************************SHEET FUNCTION*****************************************//
+/*createSheet(chord_list) printed the notes on the sheet. 
+It has to call chord_list = output of chordAliette in chordrep.js*/
+
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
 
 const list_notes = ["C", "D", "E", "F", "G", "A", "B"]
+
+function C_to_0(chord) {
+    for (var k = 0; k < chord.length; k++) {
+        chord[k][0] = list_notes.indexOf(chord[k][0])
+    }
+    return chord
+}
 
 const ctrl = (function(ct) {
     ct = [].slice.call(ct)
@@ -19,7 +30,6 @@ const notesElem = document.getElementById('notes')
 function createNote(n, i) {
     const note = document.createElementNS(svgNS, 'use')
     let anchor
-    n[0] = list_notes.indexOf(n[0])
     if (n.length === 0) anchor = '#double-rest'
     else {
         anchor = '#note'
@@ -46,12 +56,22 @@ function createSheet(chord_list) {
         createChord(chord_list[i], i)
     }
 }
-//const chord_to_play1 = [['E',4,0],['A',4,1]]
-//const chord_to_play2 = [['E',4,0],['B',4,1]]
-//let chord_list = [chord_to_play1, chord_to_play2]
-//createChord(chord_to_play1,1)
-//createChord(chord_to_play2,2)
+const chord_to_play1 = [
+    ['E', 4, 0],
+    ['A', 4, 1]
+]
+const chord_to_play2 = [
+    ['E', 4, 0],
+    ['B', 4, 1]
+]
 
-//function cleanSheet(){}
+createSheet([C_to_0(chord_to_play1), C_to_0(chord_to_play2)])
+
+function cleanSheet() {
+    var element = document.getElementById("notes");
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+}
 
 //add bar : lots of lines coming
