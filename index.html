@@ -52,6 +52,7 @@
         </div>
         <div class="button">
             <button v-on:click="go()">Go</button>
+            <button v-on:click="next()">Next</button>
         </div>
     </div>
 
@@ -118,12 +119,17 @@
 
     </div>
 
-    <div id="keyboard" class="principalDiv">beautiful keyboard</div>
+    <div id="keyboard" class="principalDiv">
+        <canvas id="canvasKeyboard" width="1500" height="250" >
+            <!-- <img src="pianoKeyboard88keys.png" alt="pianoKeyboard88keys"> -->
+        </canvas>
+    </div>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
+    <script src="keyboard.js"></script>
     <script src="naive.js"></script>
     <script src="main.js"></script>
     <script src="chordrep.js"></script>

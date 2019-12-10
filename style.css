@@ -39,7 +39,7 @@ h1 {
 
 #sheet {
     border-style: solid;
-    height: 300px;
+    height: 350px;
 }
 
 
@@ -93,5 +93,8 @@ svg {
 
 #keyboard {
     border-style: solid;
-    height: 100px;
+}
+
+#keyboard img {
+    width : 100%;
 }
