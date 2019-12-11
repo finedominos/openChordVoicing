@@ -44,8 +44,7 @@ function createNote(n, i, shift) {
     if (n[2] == 1) { createElementofNote(n, i, '#sharp') }
     if (n[2] == -1) { createElementofNote(n, i, '#flat') }
     if (shift == "no_shift") { //then we add a going_up of down bar
-        //if (n[1]>5) {createElementofNote(n,i,'#going_down_bar')}
-        //else {createElementofNote(n,i,'#going_up_bar')}
+        if (n[1] > 5) { createElementofNote(n, i, '#going_down_bar') } else { createElementofNote(n, i, '#going_up_bar') }
         createElementofNote(n, i, '#note')
     } else { createElementofNote(n, i + 0.12, '#note') } //shift so no bar
     var a = n[0].toString() + n[1].toString()
