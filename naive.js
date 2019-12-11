@@ -25,7 +25,7 @@ var firstOct = {
     'Cb': 12,
 };
 
-var listCombinationsFirstChord = [];
+var listCombinationsChord = [];
 var iterationList = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // we don't want the for in the recursive to always manipulate the same index..
 
 function naive(chordSequence) {
@@ -39,8 +39,20 @@ function naive(chordSequence) {
     //lets work only with the last chord :
 
     //Let's compute the closed (unspread) chord on the 4 first octaves (after, this is too high for the root...)
+    chordSequenceFinalListCombinations=[]
+    chordSequenceAsList.forEach(chord => {
+        chordSequenceFinalListCombinations.push([...compute(chord)])
+    });
+    console.log("total sequence : ");
+    console.log(chordSequenceFinalListCombinations)
+    return(chordSequenceFinalListCombinations[0])
+    
+}
 
-    baseKeyListOctage1 = chordSequenceAsList[0];
+function compute(baseKeyListOctage1) {
+
+    listCombinationsChord = [];
+
     baseKeyListOctage2 = [...baseKeyListOctage1]
     for (var i = 0; i < baseKeyListOctage2.length; i++) {
         baseKeyListOctage2[i] += 12;
@@ -60,9 +72,9 @@ function naive(chordSequence) {
     console.log(baseKeyListOctage4)
 
     // listCombinationsFirstChord.push(baseKeyListOctage1);     // First octave is too low
-    listCombinationsFirstChord.push(baseKeyListOctage2);
-    listCombinationsFirstChord.push(baseKeyListOctage3);
-    listCombinationsFirstChord.push(baseKeyListOctage4);
+    listCombinationsChord.push(baseKeyListOctage2);
+    listCombinationsChord.push(baseKeyListOctage3);
+    listCombinationsChord.push(baseKeyListOctage4);
 
 
     //Now let's compute all possible combinations keeping the root in one of the 4th first octaves and everything else above this root :
@@ -74,11 +86,11 @@ function naive(chordSequence) {
 
 
     console.log("all possible chords with root as the lower key : ")
-    console.log(listCombinationsFirstChord);
+    console.log(listCombinationsChord);
 
     // Filtrating chords that are inaccessible, or accessibles with only one hand, or extremely too much spread :
     var listCombinationsFirstChordAccessibleBothHands = [];
-    listCombinationsFirstChord.forEach(chord => {
+    listCombinationsChord.forEach(chord => {
         if (accessibleBothHands(chord)) {
             listCombinationsFirstChordAccessibleBothHands.push(chord);
         }
@@ -123,7 +135,7 @@ function recursiveCombinationsCreation(baseKeyList, indexBrowthing, rootsOctave)
     for (iterationList[indexBrowthing] = 1; iterationList[indexBrowthing] < 7 - rootsOctave; iterationList[indexBrowthing]++) {  // i : index for the 3rd if indexBrowthing = 1, etc...
         var newKeyList = [...baseKeyList]       // cloning the baseKeyList;
         newKeyList[indexBrowthing] += 12 * iterationList[indexBrowthing];
-        listCombinationsFirstChord.push(newKeyList);
+        listCombinationsChord.push(newKeyList);
         if (indexBrowthing < baseKeyList.length - 1) {
             recursiveCombinationsCreation(newKeyList, indexBrowthing + 1, rootsOctave)
         }

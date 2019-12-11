@@ -18,7 +18,6 @@ function printChordOnKeyboard(chord) {
 
     chord[0].forEach(key => {
 
-        console.log(key)
         x = keywidth*1.5;
         x += Math.floor(key/12)*keywidth*7;
         remaining = key%12;
@@ -33,7 +32,6 @@ function printChordOnKeyboard(chord) {
         context.rect(x, 240, keywidth, 10);
         context.fillStyle = "red";
         context.fill();
-        console.log(x)
     });
 
 }
