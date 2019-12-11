@@ -52,15 +52,15 @@ h1 {
 }
 
 .svg {
-    position: absolute;
+    position: relative;
     overflow: auto;
-    height: 350px;
-    width: 80%;
+    height: 325px;
+    width: 95%;
 }
 
 svg {
     position: absolute;
-    top: 15px;
+    top: 17px;
     left: 10px;
     right: 0;
     bottom: 0;
@@ -96,5 +96,5 @@ svg {
 }
 
 #keyboard img {
-    width : 100%;
+    width: 100%;
 }
