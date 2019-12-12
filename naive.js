@@ -120,8 +120,8 @@ function chordToKeyList(chord) {
     var root = firstOct[chord.root];
     var keyList = [root];
     keyList.push(chord.color == "M" ? root + 4 : root + 3)
-    keyList.push(chord.seven == "M" ? root + 11 : root + 10)
-    keyList.push(chord.ninth == "♮" ? root + 14 : (chord.ninth == "b" ? root + 13 : root + 15))
+    keyList.push(chord.seventh == "7Maj" ? root + 11 : root + 10)
+    keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
     return keyList;
 }
 

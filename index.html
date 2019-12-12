@@ -18,41 +18,41 @@
 
     <div id="sequenceOfChordsBuilding" class="principalDiv">
         <div id="chordPicking">
-            <select v-model="rootChosen">
-                <option v-for="item in roots">{{item}}</option>
-            </select>
+            <div style="margin:10px;width: 300px;" class="container">
+                <p class="description">Choose the root of your chord :</p>
+                <div class="row"></div>
+            </div>
+    
+            <div class="subContainer">
+                <div style="margin:10px;width: 188px;" class="container">
+                    <p class="description">Choose the color of your chord :</p>
+                    <div class="row"></div>
+                    <div class="row"></div>
+                    <div class="row"></div>
+                </div>
+    
+                <div style="margin:10px;width: 120px;" class="container">
+                    <p class="description">Choose the tension :</p>
+                    <div class="row"></div>
+                    <div class="row"></div>
+                    <div class="row"></div>
+                </div>
+            </div>
 
-            <select v-model="alterationChosen">
-                <option v-for="item in alterations">{{item}}</option>
-            </select>
-
-            <select v-model="colorChosen">
-                <option v-for="item in colors">{{item}}</option>
-            </select>
-
-
-            <p class="label">seven | ninth</p>
-            <select v-model="sevenChosen">
-                <option v-for="item in colors">{{item}}</option>
-            </select>
-            <select v-model="ninthChosen">
-                <option v-for="item in alterations">{{item}}</option>
-            </select>
-
-            <p>chord chosen : {{chordPrint}}</p>
         </div>
 
         <div class="button">
-            <button v-on:click="addChord()">Add</button>
-            <button v-on:click="reset()">Reset</button>
+            <p id="labelPrinting">chosen chord :</p>
+            <button id="addButton">Add</button>
+            <button id="resetButton">Reset</button>
         </div>
         <div id="sequencePrinting">
             i print the sequence of chords here
-            <p v-for="item in chordSequence">{{item.print}}</p>
+            <p id="contentSequencePrinting"></p>
         </div>
         <div class="button">
-            <button v-on:click="go()">Go</button>
-            <button v-on:click="next()">Next</button>
+            <button id="goButton">Go</button>
+            <button id="nextButton">Next</button>
         </div>
     </div>
 

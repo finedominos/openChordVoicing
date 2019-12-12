@@ -18,14 +18,14 @@ function printChordOnKeyboard(chord) {
 
     chord[0].forEach(key => {
 
-        x = keywidth*1.5;
+        x = keywidth;
         x += Math.floor(key/12)*keywidth*7;
         remaining = key%12;
         if(remaining<6){
-            x+= remaining*keywidth*0.5
+            x+= (remaining+1)*keywidth*0.5
         }
         else{
-            x += 3*keywidth + (remaining-5)*keywidth*0.5
+            x += 3*keywidth + (remaining-4)*keywidth*0.5
         }
 
         context.beginPath();

@@ -18,17 +18,70 @@ h1 {
 
 #sequenceOfChordsBuilding {
     border-style: solid;
-    height: 150px;
+    height: 180px;
     display: flex;
     justify-content: space-around
 }
 
-.label {
-    margin-bottom: 0;
-}
-
 #chordPicking {
     flex-direction: row;
+}
+
+:root {
+    --selected-color: #106cc8;
+    --active-color: #1e86ed;
+}
+
+.description{
+    margin:0;
+    font-family: 'Roboto', Arial;
+    font-style: oblique;
+    font-size: small;
+}
+
+.subContainer{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.linear-pillbar {
+    font-family: 'Roboto', Arial;
+    display: flex;
+    border: 1px solid var(--selected-color);
+    position: relative;
+    border-radius: 3px;
+}
+
+.option {
+    outline: none;
+    font-size: 0.9em;
+    border: none;
+    flex: 1 1 auto;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--selected-color);
+    color: var(--selected-color);
+    cursor: pointer;
+}
+
+.option :hover, :focus, :active {
+    color: var(--active-color);
+}
+
+.option :last-child {
+    border-right: none;
+}
+
+.equal {
+    flex: 1;
+}
+
+.selected {
+    background: var(--selected-color);
+    color: white;
 }
 
 
