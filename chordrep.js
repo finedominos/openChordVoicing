@@ -1,3 +1,5 @@
+
+//rename
 var chromatic = {
     'B#': 1,
     'C♮': 1,
@@ -22,7 +24,7 @@ var chromatic = {
     'Cb': 12,
   };
   
-
+//rename
 var diatonic = {
     'C': 1,
     'D': 2,
@@ -33,11 +35,24 @@ var diatonic = {
     'B': 7
   };
   
+//build templates dinamically from input
 var chordTypes = {
     'major': [[1, 3, 5], [1, 5, 8]],
-    'minor': [[1, 3, 5], [1, 4, 8]]
+    'minor': [[1, 3, 5], [1, 4, 8]],
+    'major79': [[1, 2, 3, 7], [1, 3, 5, 12]]
   };
-  
+
+function chordToTemplate(chord) {
+    //console.log(chord.print);
+    //var root = firstOct[chord.root];
+    //figure out how to use the info about root here as well
+    var template = [[1,3,7,9],[1]];
+    template[1].push(chord.color == "M" ? 4 : 3);
+    template[1].push(chord.seven == "M" ? 11 : 10);
+    template[1].push(chord.ninth == "♮" ? 2 : (chord.ninth == "b" ? 1 : 3));
+    return template;
+}
+ 
 function find_val(dict, value){
     arr = [];
     for (d in dict){
@@ -48,6 +63,7 @@ function find_val(dict, value){
     return arr;
 }
 
+//finding the chromatic name of note (A# or Bb)
 function find_note(dnote, chpos){
     arr = find_val(chromatic, chpos);
     for (a in arr){
@@ -58,6 +74,7 @@ function find_note(dnote, chpos){
     }
 }
 
+//
 function make_chord(root, type){
     chord = [[]];
     chord[0]=chordTypes[type][0];
@@ -75,6 +92,7 @@ function make_chord(root, type){
     return chord;
 }
 
+//
 function chordAliette(chord){
     notesChord = [[]];
     console.log(notesChord);
@@ -85,10 +103,55 @@ function chordAliette(chord){
             case 'b': alt = '-1'; break; 
             default: alt = '0';
         }
-        notesChord[n] = [chord[1][n].charAt(0), 4, alt]
+        notesChord[n] = [diatonic[chord[1][n].charAt(0)], 4, alt]
+        console.log(notesChord);
     }
     return notesChord;
 }
 
 
+//representing the notes in the sheet according to numbers [1-85]
+function makeChord2(positions1_85, root, chTemplate){
+    chord = [];
+    for (i=0; i<positions1_85.length; i++){
+        newChromatic = positions1_85[i] % 12;
+        if (newChromatic == 0) newChromatic = 12;
+        
+        for(j=0;j<(chTemplate[0]).length; j++){
+            chNote = (chTemplate[1][j] + chromatic[root] - 1) % 12;
+            if (chNote == 0) chNote = 12;
+            if(chNote == newChromatic){
+                newDiatonic = (chTemplate[0][j]+diatonic[root.charAt(0)] - 1) % 7;
+                if (newDiatonic == 0) newDiatonic = 7;
+            }
+        }
 
+        //newDiatonic = (diatonic[root.charAt(0)] + chTemplate[0][i] - 1) % 7;
+        
+        OctNumber = Math.floor(positions1_85[i]/12);
+
+        newNote = find_note(find_val(diatonic, newDiatonic), newChromatic);
+        console.log(newNote, OctNumber);
+        newNote+=OctNumber;
+        chord[i] = newNote;
+    }
+
+    return chord;
+}
+
+
+function chordAliette2(chord){
+    notesChord = [[]];
+    console.log(notesChord);
+    for (n in chord){
+        alt='';
+        console.log(chord[n]);
+        switch (chord[n].charAt(1)){
+            case '#': alt = '+1'; break;
+            case 'b': alt = '-1'; break; 
+            default: alt = '0';
+        }
+        notesChord[n] = [diatonic[chord[n].charAt(0)], parseInt(chord[n].charAt(2)), alt]
+    }
+    return notesChord;
+}
