@@ -39,21 +39,21 @@ function naive(chordSequence) {
     //lets work only with the last chord :
 
     //Let's compute the closed (unspread) chord on the 4 first octaves (after, this is too high for the root...)
-    chordSequenceFinalListCombinations=[]
+    chordSequenceFinalListCombinations = []
     chordSequenceAsList.forEach(chord => {
         chordSequenceFinalListCombinations.push([...compute(chord)])
     });
     console.log("total sequence : ");
     console.log(chordSequenceFinalListCombinations)
-    return(chordSequenceFinalListCombinations[0])
-    
+    return (chordSequenceFinalListCombinations[0])
+
 }
 
-function compute(baseKeyListOctage1) {
+function compute(baseKeyListOctave1) {
 
     listCombinationsChord = [];
 
-    baseKeyListOctage2 = [...baseKeyListOctage1]
+    baseKeyListOctage2 = [...baseKeyListOctave1]
     for (var i = 0; i < baseKeyListOctage2.length; i++) {
         baseKeyListOctage2[i] += 12;
     }
@@ -66,12 +66,12 @@ function compute(baseKeyListOctage1) {
         baseKeyListOctage4[i] += 12;
     }
 
-    // console.log(baseKeyListOctage1)      // First octave is too low
+    // console.log(baseKeyListOctave1)      // First octave is too low
     console.log(baseKeyListOctage2)
     console.log(baseKeyListOctage3)
     console.log(baseKeyListOctage4)
 
-    // listCombinationsFirstChord.push(baseKeyListOctage1);     // First octave is too low
+    // listCombinationsFirstChord.push(baseKeyListOctave1);     // First octave is too low
     listCombinationsChord.push(baseKeyListOctage2);
     listCombinationsChord.push(baseKeyListOctage3);
     listCombinationsChord.push(baseKeyListOctage4);
@@ -79,7 +79,7 @@ function compute(baseKeyListOctage1) {
 
     //Now let's compute all possible combinations keeping the root in one of the 4th first octaves and everything else above this root :
 
-    // recursiveCombinationsCreation(baseKeyListOctage1, 1, 1)     // First octave is too low
+    // recursiveCombinationsCreation(baseKeyListOctave1, 1, 1)     // First octave is too low
     recursiveCombinationsCreation(baseKeyListOctage2, 1, 2)
     recursiveCombinationsCreation(baseKeyListOctage3, 1, 3)
     recursiveCombinationsCreation(baseKeyListOctage4, 1, 4)
@@ -119,9 +119,23 @@ function chordToKeyList(chord) {
     console.log(chord.print);
     var root = firstOct[chord.root];
     var keyList = [root];
-    keyList.push(chord.color == "M" ? root + 4 : root + 3)
-    keyList.push(chord.seventh == "7Maj" ? root + 11 : root + 10)
-    keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
+    keyList.push(chord.color == "M" ? root + 4 : (chord.color == "m" ? root + 3 : root + 7))    //if powerchord, don't play third but play the fifth, that cannot being alterated in principle
+    
+    if (chord.seventh != "/") {
+        keyList.push(chord.seventh == "7" ? root + 10 : root + 11)
+    }
+    if (chord.ninth != "/") {
+        keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
+    }
+    if (chord.eleventh != "/") {
+        keyList.push(chord.eleventh == "11" ? root + 17 : root + 18)
+    }
+    if (chord.thirteenth != "/") {
+        keyList.push(chord.thirteenth == "13" ? root + 21 : root+20)
+    }
+    if (chord.fifth != "5") {
+        keyList.push(chord.ninth == "b5" ? root + 6 : root + 8)
+    }
     return keyList;
 }
 
