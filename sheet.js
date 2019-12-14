@@ -46,9 +46,8 @@ function createNote(n, i, shift) {
     j = i
     if (n[2] == 1) { createElementofNote(n, i, '#sharp') }
     if (n[2] == -1) { createElementofNote(n, i, '#flat') }
-    if (shift == "shift") { j = i + 0.12 } else {}
+    if (shift == "shift") { j = i + 0.12 } else { createElementofNote(n, i, '#going_up_bar') }
     //if (n[1] > 5) { createElementofNote(n, i, '#going_down_bar') } else { createElementofNote(n, i, '#going_up_bar') }
-    createElementofNote(n, j, '#going_up_bar')
     createElementofNote(n, j, '#note')
     var a = n[0].toString() + n[1].toString()
     if (bar_m_needed.includes(a)) { createElementofNote(n, j, '#bar_mid') }
@@ -58,7 +57,7 @@ function createNote(n, i, shift) {
 function createChord(chord, i) {
     for (var k = 0; k < chord.length; k++) {
         if (k > 0) {
-            if (chord[k][0] == (chord[k - 1][0] + 1)) {
+            if ((chord[k][0] == chord[k - 1][0] + 1) && chord[k][1] == chord[k - 1][1]) {
                 createNote(chord[k], i, "shift")
             } else { createNote(chord[k], i, "no_shift") }
         } else { createNote(chord[k], i, "no_shift") }
@@ -80,8 +79,8 @@ const chord_to_play1 = [
     [4, 5, 0]
 ]
 const chord_to_play2 = [
-    [6, 4, -1],
-    [5, 4, 1]
+    [5, 4, 0],
+    [6, 4, 1]
 ]
 
 createSheet([chord_to_play1, chord_to_play2])
