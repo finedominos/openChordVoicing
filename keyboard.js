@@ -1,6 +1,8 @@
 
 let canvas = document.getElementById("canvasKeyboard");
 let context = canvas.getContext("2d");
+canvas.width = keyboard.offsetWidth-5;
+
 var img = new Image();
 img.onload = function () {
     context.drawImage(img, 0, 0, canvas.width, 240);
