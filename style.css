@@ -13,6 +13,7 @@ h1 {
     text-align: center;
 }
 
+
 /* Sequence of chords building */
 
 #sequenceOfChordsBuilding {
@@ -68,7 +69,9 @@ h1 {
     cursor: pointer;
 }
 
-.option :hover, :focus, :active {
+.option :hover,
+ :focus,
+ :active {
     color: var(--active-color);
 }
 
@@ -85,21 +88,21 @@ h1 {
     color: white;
 }
 
-#finalButtons{
+#finalButtons {
     padding-top: 70px;
 }
 
+
 /* end of Sequence of chord building*/
+
 
 /*SHEET*/
 
 #sheet {
     border-style: solid;
     border-radius: 1em;
-    height: 350px;
+    height: 170px;
 }
-
-/*SHEET */
 
 .ctrl {
     position: absolute;
@@ -110,17 +113,15 @@ h1 {
 .svg {
     position: relative;
     overflow: auto;
-    height: 350px;
+    height: 180px;
 }
-
-/* dirty way to dimension, to improve */
 
 svg {
     position: absolute;
-    top: 17px;
+    top: -15px;
     left: 10px;
     width: 99%;
-    height: 95%;
+    height: 100%;
     stroke-width: 2;
     stroke: #000;
 }
@@ -135,12 +136,14 @@ svg {
 
 .note text {
     font-family: serif;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: normal;
     stroke: none;
 }
 
+
 /*END OF SHEET */
+
 
 /*KEYBOARD*/
 

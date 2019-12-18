@@ -33,9 +33,9 @@ function createElementofNote(n, i, id) {
     let anchor
     anchor = id
     note.setAttributeNS(xlinkNS, 'href', anchor)
-    note.setAttribute('x', i * 150)
+    note.setAttribute('x', 40 + i * 80)
     console.log(n)
-    if (n.length) note.setAttribute('y', n[0] * -10 - (n[1] - 4) * 10 * 7)
+    if (n.length) { note.setAttribute('y', -5 * n[0] - (n[1] - 4) * 5 * 7) }
     notesElem.appendChild(note)
 }
 
@@ -46,7 +46,7 @@ function createNote(n, i, shift) {
     j = i
     if (n[2] == 1) { createElementofNote(n, i, '#sharp') }
     if (n[2] == -1) { createElementofNote(n, i, '#flat') }
-    if (shift == "shift") { j = i + 0.12 } else { createElementofNote(n, i, '#going_up_bar') }
+    if (shift == "shift") { j = i + 0.14 } else { createElementofNote(n, i, '#going_up_bar') }
     //if (n[1] > 5) { createElementofNote(n, i, '#going_down_bar') } else { createElementofNote(n, i, '#going_up_bar') }
     createElementofNote(n, j, '#note')
     var a = n[0].toString() + n[1].toString()
@@ -57,7 +57,7 @@ function createNote(n, i, shift) {
 function createChord(chord, i) {
     for (var k = 0; k < chord.length; k++) {
         if (k > 0) {
-            if ((chord[k][0] == chord[k - 1][0] + 1) && chord[k][1] == chord[k - 1][1]) {
+            if ((chord[k][0] == chord[k - 1][0] + 1 && chord[k][1] == chord[k - 1][1]) || (chord[k][0] == chord[k - 1][0] - 6 && chord[k][1] == chord[k - 1][1] + 1)) {
                 createNote(chord[k], i, "shift")
             } else { createNote(chord[k], i, "no_shift") }
         } else { createNote(chord[k], i, "no_shift") }
@@ -72,15 +72,14 @@ function createSheet(chord_list) {
 
 
 const chord_to_play1 = [
-    [1, 2, 0],
     [0, 4, 0],
-    [1, 4, 0],
-    [3, 4, 1],
-    [4, 5, 0]
+    [2, 4, 0],
+    [4, 4, 0],
+    [6, 4, 1],
+    [0, 5, 0]
 ]
 const chord_to_play2 = [
-    [5, 4, 0],
-    [6, 4, 1]
+    [5, 5, 0]
 ]
 
 createSheet([chord_to_play1, chord_to_play2])
