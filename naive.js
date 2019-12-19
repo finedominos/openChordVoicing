@@ -45,7 +45,9 @@ function naive(chordSequence) {
     });
     console.log("total sequence : ");
     console.log(chordSequenceFinalListCombinations)
-    return (chordSequenceFinalListCombinations[0])
+    
+    //ANDRIANA CHANGED THE RETURN LINE!!!
+    return (chordSequenceFinalListCombinations)
 
 }
 
@@ -134,7 +136,7 @@ function chordToKeyList(chord) {
         keyList.push(chord.thirteenth == "13" ? root + 21 : root+20)
     }
     if (chord.fifth != "5") {
-        keyList.push(chord.ninth == "b5" ? root + 6 : root + 8)
+        keyList.push(chord.fifth == "b5" ? root + 6 : root + 8)
     }
     return keyList;
 }

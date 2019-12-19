@@ -199,9 +199,22 @@ document.getElementById("resetButton").onclick = function () {
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
+//Andriana changed this
 document.getElementById("goButton").onclick = function () {
-    positionsList = shuffle(naive(chordCollection)); // from script naive.js
-    printChordOnKeyboard([positionsList[printed]])
+    positionsList = (naive(chordCollection)); // from script naive.js
+    shuffledPosList=[];
+    chordsPosList=[];
+    for (var i=0; i<positionsList.length; i++){
+        shuffledPosList[i] = shuffle(positionsList[i]);
+        chordsPosList[i] = shuffledPosList[i][0];
+    }
+    printChordOnKeyboard([shuffledPosList[0][printed]]);
+
+    console.log("shuffledPosList: ", shuffledPosList);
+    console.log("chordPosList: ", chordsPosList);
+
+    cleanSheet();
+    ChordListToSheet(chordCollection, chordsPosList);
 };
 
 document.getElementById("nextButton").onclick = function () {
