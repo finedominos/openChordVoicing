@@ -112,12 +112,13 @@ h1 {
 
 .svg {
     position: relative;
-    overflow: auto;
+    overflow: visible;
     height: 180px;
 }
 
 svg {
     position: absolute;
+    overflow: visible;
     top: -5px;
     left: 10px;
     width: 99%;
