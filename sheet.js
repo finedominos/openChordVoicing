@@ -40,6 +40,7 @@ function createElementofNote(n, i, id) {
 }
 
 const bar_m_needed = ['04', '55', '22']
+const bar_low_needed = ['05', '55', '22']
 
 function createNote(n, i, shift) {
     let j
@@ -79,7 +80,9 @@ const chord_to_play1 = [
     [0, 5, 0]
 ]
 const chord_to_play2 = [
-    [5, 5, 0]
+    [2, 2, 0],
+    [5, 5, 0],
+    [4, 1, 0]
 ]
 
 createSheet([chord_to_play1, chord_to_play2])

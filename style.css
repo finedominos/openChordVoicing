@@ -101,7 +101,7 @@ h1 {
 #sheet {
     border-style: solid;
     border-radius: 1em;
-    height: 170px;
+    height: 200px;
 }
 
 .ctrl {
@@ -112,13 +112,14 @@ h1 {
 
 .svg {
     position: relative;
-    overflow: auto;
+    overflow: visible;
     height: 180px;
 }
 
 svg {
     position: absolute;
-    top: -15px;
+    overflow: visible;
+    top: -5px;
     left: 10px;
     width: 99%;
     height: 100%;
