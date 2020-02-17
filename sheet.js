@@ -5,15 +5,6 @@ It has to call chord_list = output of chordAliette in chordrep.js*/
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
 
-//const list_notes = ["C", "D", "E", "F", "G", "A", "B"]
-
-/*function C_to_0(chord) {
-    var copy = JSON.parse(JSON.stringify(chord));
-    for (var k = 0; k < chord.length; k++) {
-        copy[k][0] = list_notes.indexOf(chord[k][0])
-    }
-    return copy
-} */
 
 const ctrl = (function(ct) {
     ct = [].slice.call(ct)
@@ -21,8 +12,6 @@ const ctrl = (function(ct) {
     for (const c of ct) ctrl[c.name] = c
     return ctrl
 })(document.querySelectorAll('.ctrl [name]'))
-
-console.log(ctrl)
 
 ctrl.value = notes
 
@@ -34,7 +23,6 @@ function createElementofNote(n, i, id) {
     anchor = id
     note.setAttributeNS(xlinkNS, 'href', anchor)
     note.setAttribute('x', 40 + i * 80)
-    console.log(n)
     if (n.length) { note.setAttribute('y', -5 * n[0] - (n[1] - 4) * 5 * 7) }
     notesElem.appendChild(note)
 }
@@ -46,7 +34,15 @@ function createNote(n, i, shift) {
     let j
     j = i
     if (n[2] == 1) { createElementofNote(n, i, '#sharp') }
+    if (n[2] == 2) {
+        createElementofNote(n, i - 0.10, '#sharp')
+        createElementofNote(n, i, '#sharp')
+    }
     if (n[2] == -1) { createElementofNote(n, i, '#flat') }
+    if (n[2] == -2) {
+        createElementofNote(n, i, '#flat')
+        createElementofNote(n, i - 0.10, '#flat')
+    }
     if (shift == "shift") { j = i + 0.14 } else { createElementofNote(n, i, '#going_up_bar') }
     //if (n[1] > 5) { createElementofNote(n, i, '#going_down_bar') } else { createElementofNote(n, i, '#going_up_bar') }
     createElementofNote(n, j, '#note')
@@ -75,14 +71,12 @@ function createSheet(chord_list) {
 const chord_to_play1 = [
     [0, 4, 0],
     [2, 4, 0],
-    [4, 4, 0],
+    [4, 4, 2],
     [6, 4, 1],
     [0, 5, 0]
 ]
 const chord_to_play2 = [
-    [2, 2, 0],
-    [5, 5, 0],
-    [4, 1, 0]
+    [0, 4, -2],
 ]
 
 createSheet([chord_to_play1, chord_to_play2])
@@ -94,7 +88,7 @@ function cleanSheet() {
     }
 }
 
-/*****************************************************************************/
+/***************************************************************************/
 /********************************AUDIO PART**********************************/
 /*****************************************************************************/
 
