@@ -1,6 +1,7 @@
 //***********************************SHEET FUNCTION*****************************************//
-/*createSheet(chord_list) printed the notes on the sheet. 
+/*the function createSheet(chord_list) printed the notes on the sheet. 
 It has to call chord_list = output of chordAliette in chordrep.js*/
+//the function cleanSheet() clean the sheet//
 
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
