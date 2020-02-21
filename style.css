@@ -142,6 +142,19 @@ svg {
     stroke: none;
 }
 
+#audio_button {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: blue;
+    border: 5px solid darkblue;
+    position: absolute;
+    left: 1340px;
+    top: 405px;
+    cursor: pointer;
+    z-index: 1;
+}
+
 
 /*END OF SHEET */
 

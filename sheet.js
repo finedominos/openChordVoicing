@@ -74,16 +74,3 @@ function cleanSheet() {
         element.removeChild(element.firstChild);
     }
 }
-
-/***************************************************************************/
-/********************************AUDIO PART**********************************/
-/*****************************************************************************/
-
-
-var audioAl1 = new Audio('Piano.ff.F4ready03.wav');
-var audioAl2 = new Audio('Piano.ff.G4ready03.wav');
-
-function play2notes() {
-    audioAl1.play()
-    audioAl2.play()
-}
