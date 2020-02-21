@@ -68,20 +68,6 @@ function createSheet(chord_list) {
     }
 }
 
-
-const chord_to_play1 = [
-    [0, 4, 0],
-    [2, 4, 0],
-    [4, 4, 2],
-    [6, 4, 1],
-    [0, 5, 0]
-]
-const chord_to_play2 = [
-    [0, 4, -2],
-]
-
-createSheet([chord_to_play1, chord_to_play2])
-
 function cleanSheet() {
     var element = document.getElementById("notes");
     while (element.firstChild) {

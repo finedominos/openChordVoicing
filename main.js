@@ -17,7 +17,8 @@ function computeLabel() {
 //Temporary needed function
 //// This function is not mine, founded at https://github.com/Daplie/knuth-shuffle
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -107,8 +108,7 @@ const LinearPillbar = {
                         Vue.set(otherOption, 'selected', false);
                     }
                 }
-            }
-            else if (!option.group) {
+            } else if (!option.group) {
                 Vue.set(option, 'selected', !option.selected);
             }
         },
@@ -185,7 +185,7 @@ LinearPillbar.propsData.options = [
 vue = new Vue(LinearPillbar);
 vueCollection.push(vue);
 
-document.getElementById("addButton").onclick = function () {
+document.getElementById("addButton").onclick = function() {
     chordCollection.push(computeChord())
     var string = "";
     chordCollection.forEach(element => {
@@ -194,17 +194,18 @@ document.getElementById("addButton").onclick = function () {
     document.getElementById("contentSequencePrinting").innerHTML = string;
 };
 
-document.getElementById("resetButton").onclick = function () {
+document.getElementById("resetButton").onclick = function() {
+    cleanSheet()
     chordCollection = []
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
 //Andriana changed this
-document.getElementById("goButton").onclick = function () {
+document.getElementById("goButton").onclick = function() {
     positionsList = (naive(chordCollection)); // from script naive.js
-    shuffledPosList=[];
-    chordsPosList=[];
-    for (var i=0; i<positionsList.length; i++){
+    shuffledPosList = [];
+    chordsPosList = [];
+    for (var i = 0; i < positionsList.length; i++) {
         shuffledPosList[i] = shuffle(positionsList[i]);
         chordsPosList[i] = shuffledPosList[i][0];
     }
@@ -217,7 +218,7 @@ document.getElementById("goButton").onclick = function () {
     ChordListToSheet(chordCollection, chordsPosList);
 };
 
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("nextButton").onclick = function() {
     if (positionsList) {
         printed += 1
         printChordOnKeyboard([positionsList[printed]])
