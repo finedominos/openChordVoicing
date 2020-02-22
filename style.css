@@ -149,8 +149,8 @@ svg {
     background: blue;
     border: 5px solid darkblue;
     position: absolute;
-    left: 1340px;
-    top: 405px;
+    left: 180px;
+    top: 395px;
     cursor: pointer;
     z-index: 1;
 }

@@ -1,44 +1,52 @@
 //***********************************AUDIO FUNCTION*****************************************//
-//Countains :
-// - sleep() to insert delay between playing the chords
-// - play_sheet() that is linked to the button
-// - audio files of the piano notes
+//TO DO : button must be inaccessible during the playing
+// TO DO : adapt the function num_to_note() so it gives the right note
 
-function sleep(delay) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
+//play all notes of a chord at the same time
+function play_chord(chord) {
+    for (var i in chord) {
+        chord[i].play();
+    }
 }
-
-function play_sheet(sheet) {
-    for (var c in sheet) {
-        chord = sheet[c];
-        for (var n in chord) {
-            note = chord[n];
-            note.play();
-        }
-        sleep(3030);
-        for (var n in chord) {
-            note = chord[n];
-            note.pause();
-            note.currentTime = 0;
-        }
+//play a given a sheet in format [G4..], with chords every 3.5 sec
+function play_sheet_formG4(sheet) {
+    for (var chord_numero in sheet) {
+        chord = sheet[chord_numero];
+        setTimeout(play_chord, chord_numero * 3500, chord);
     }
 }
 
-function play_testSequence() {
-    play_sheet([
-        [D4],
-        [F4, D4],
-    ])
+//convert (num_to_note) and play (play_sheet_formG4) the sheet printed 
+function play_sheet_no_arg() {
+    sheet_formG4 = num_to_note(chordsPosList);
+    play_sheet_formG4(sheet_formG4);
 }
-
-audio_button.onclick = play_testSequence;
+audio_button.onclick = play_sheet_no_arg;
 
 //***************************BANK OF NOTES - 3 seconds each**************************//
 
-var G4 = new Audio('piano_notes/Piano.ff.G4ready03.wav');
-var Gb4 = new Audio('piano_notes/Piano.ff.Gb4ready03.wav');
-var F4 = new Audio('piano_notes/Piano.ff.F4ready03.wav');
-var E4 = new Audio('piano_notes/Piano.ff.E4.wav');
-var D4 = new Audio('piano_notes/Piano.ff.D4.wav');
-var Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
+const G4 = new Audio('piano_notes/Piano.ff.G4ready03.wav');
+const Gb4 = new Audio('piano_notes/Piano.ff.Gb4ready03.wav');
+const F4 = new Audio('piano_notes/Piano.ff.F4ready03.wav');
+const E4 = new Audio('piano_notes/Piano.ff.E4.wav');
+//const Eb4 = new Audio('piano_notes/Piano.ff.Eb4.wav');
+const D4 = new Audio('piano_notes/Piano.ff.D4.wav');
+const Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
+
+note_list_G4_to_61 = [Db4, D4, E4, F4, Gb4, G4];
+
+//TO MAKE RIGHT ONCE WE KNOW EXACTLY OUR RANGE//
+//TO FINALIZE : 37_to_C4//
+
+//convert the notes of a sheet (given in number of piano key) into "E4", "G4"..
+function num_to_note(num) {
+    var new_vec = [];
+    for (var ch in num) {
+        chord = num[ch];
+        new_vec = [new_vec, []];
+        for (var no in chord) {
+            new_vec[ch][no] = note_list_G4_to_61[num[ch][no] % 6];
+        }
+    }
+    return new_vec;
+}

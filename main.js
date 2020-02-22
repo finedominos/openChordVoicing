@@ -216,6 +216,7 @@ document.getElementById("goButton").onclick = function() {
 
     cleanSheet();
     ChordListToSheet(chordCollection, chordsPosList);
+    //HERE INSERT THE AFFECTATION OF THE BUTTON TO THE FUNCTION AUDIO//
 };
 
 document.getElementById("nextButton").onclick = function() {
