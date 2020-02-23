@@ -8,12 +8,20 @@ function play_chord(chord) {
         chord[i].play();
     }
 }
+
+function wait_to_push() {
+    audio_button.classList.remove("can_not_be_pushed");
+    audio_button.classList.add("can_be_pushed");
+}
 //play a given a sheet in format [G4..], with chords every 3.5 sec
 function play_sheet_formG4(sheet) {
+    audio_button.classList.remove("can_be_pushed");
+    audio_button.classList.add("can_not_be_pushed");
     for (var chord_numero in sheet) {
         chord = sheet[chord_numero];
         setTimeout(play_chord, chord_numero * 3500, chord);
     }
+    setTimeout(wait_to_push, (sheet.length - 1) * 3500);
 }
 
 //convert (num_to_note) and play (play_sheet_formG4) the sheet printed 

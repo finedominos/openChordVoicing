@@ -151,8 +151,15 @@ svg {
     position: absolute;
     left: 180px;
     top: 395px;
-    cursor: pointer;
     z-index: 1;
+}
+
+.can_be_pushed {
+    cursor: pointer;
+}
+
+.can_not_be_pushed {
+    cursor: wait;
 }
 
 
