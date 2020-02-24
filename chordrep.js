@@ -38,6 +38,7 @@ var diatonic = {
 
 
 function chordToTemplate(chord) {
+    //Building a numeric template for the type of chord chosen - in both chromatic and diatonic representation
     //console.log(chord.print);
     //var root = firstOct[chord.root];
     //figure out how to use the info about root here as well
@@ -69,7 +70,7 @@ function chordToTemplate(chord) {
     }
     if (chord.seventh != "/") {
         template[0].push(7)
-        template[1].push(chord.seven == "M" ? 12 : 11);
+        template[1].push(chord.seventh == "7Maj" ? 12 : 11);
     }
     return template;
 }
