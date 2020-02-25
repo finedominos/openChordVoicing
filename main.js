@@ -15,7 +15,7 @@ function computeLabel() {
 }
 
 //Temporary needed function
-//// This function is not mine, founded at https://github.com/Daplie/knuth-shuffle
+//// This function is not mine, found at https://github.com/Daplie/knuth-shuffle
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue, randomIndex;
@@ -200,7 +200,6 @@ document.getElementById("resetButton").onclick = function() {
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
-//Andriana changed this
 document.getElementById("goButton").onclick = function() {
     positionsList = (naive(chordCollection)); // from script naive.js
     shuffledPosList = [];

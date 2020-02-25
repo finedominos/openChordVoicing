@@ -30,24 +30,21 @@ var iterationList = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // we don't want
 
 function naive(chordSequence) {
     alert("lets go with a sequence of " + chordSequence.length + " chords")
-    var chordSequenceAsList = [];
+    var chordSequenceNotSpread = [];
     chordSequence.forEach(chord => {
         var keyList = chordToKeyList(chord)
-        chordSequenceAsList.push(keyList)
+        chordSequenceNotSpread.push(keyList)
         console.log("original chord : " + keyList);
     });
-    //lets work only with the last chord :
 
-    //Let's compute the closed (unspread) chord on the 4 first octaves (after, this is too high for the root...)
-    chordSequenceFinalListCombinations = []
-    chordSequenceAsList.forEach(chord => {
-        chordSequenceFinalListCombinations.push([...compute(chord)])
+    chordSequenceFinalList = []
+    chordSequenceNotSpread.forEach(chord => {
+        chordSequenceFinalList.push([...compute(chord)])
     });
     console.log("total sequence : ");
-    console.log(chordSequenceFinalListCombinations)
+    console.log(chordSequenceFinalList)
     
-    //ANDRIANA CHANGED THE RETURN LINE!!!
-    return (chordSequenceFinalListCombinations)
+    return (chordSequenceFinalList)
 
 }
 
@@ -55,6 +52,7 @@ function compute(baseKeyListOctave1) {
 
     listCombinationsChord = [];
 
+    //Let's compute the closed (unspread) chord on the 4 first octaves (after, this is too high for the root...)
     baseKeyListOctage2 = [...baseKeyListOctave1]
     for (var i = 0; i < baseKeyListOctage2.length; i++) {
         baseKeyListOctage2[i] += 12;
@@ -141,19 +139,19 @@ function chordToKeyList(chord) {
     return keyList;
 }
 
-function recursiveCombinationsCreation(baseKeyList, indexBrowthing, rootsOctave) {
+function recursiveCombinationsCreation(baseKeyList, indexBrowsing, rootsOctave) {
 
-    if (indexBrowthing < baseKeyList.length - 1) {
-        recursiveCombinationsCreation(baseKeyList, indexBrowthing + 1, rootsOctave)
+    if (indexBrowsing < baseKeyList.length - 1) {
+        recursiveCombinationsCreation(baseKeyList, indexBrowsing + 1, rootsOctave)
     }
     //working between octave 1 and octave 6, then tension (9th, 11th, 13th) is already between octave 2 and 7
     //having notes in the last octave is already high, maybe we shouldn't allow it. for the moment, only the tension can go there.
-    for (iterationList[indexBrowthing] = 1; iterationList[indexBrowthing] < 7 - rootsOctave; iterationList[indexBrowthing]++) {  // i : index for the 3rd if indexBrowthing = 1, etc...
+    for (iterationList[indexBrowsing] = 1; iterationList[indexBrowsing] < 7 - rootsOctave; iterationList[indexBrowsing]++) {  // i : index for the 3rd if indexBrowsing = 1, etc...
         var newKeyList = [...baseKeyList]       // cloning the baseKeyList;
-        newKeyList[indexBrowthing] += 12 * iterationList[indexBrowthing];
+        newKeyList[indexBrowsing] += 12 * iterationList[indexBrowsing];
         listCombinationsChord.push(newKeyList);
-        if (indexBrowthing < baseKeyList.length - 1) {
-            recursiveCombinationsCreation(newKeyList, indexBrowthing + 1, rootsOctave)
+        if (indexBrowsing < baseKeyList.length - 1) {
+            recursiveCombinationsCreation(newKeyList, indexBrowsing + 1, rootsOctave)
         }
     }
 }
