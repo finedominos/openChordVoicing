@@ -2,10 +2,13 @@
 // drop 3 : the 3rd is lowered of one octave
 // drop 2+4 : the 5th is lowered and the root is lowered of one octave
 
-// we ignore the 9th, 11th and 13th, even if they're not chosen "/" by the user
-//output is [[chord1], [chord2],..]
+//chord representation same as sheet.js: [0,4,+1] is a C, of octave 4, with a sharp
 
-//challenge : the input of functions drop2() and drop3() and 2+4() must be the chord in their canonic form, with root being octave 4
+// we ignore the 9th, 11th and 13th, even if they're not chosen "/" by the user
+//input is [root, 3rd, 5th, 7th]
+//output is [root, lowered_3rd, 5th, 7th]  with ex : 3rd = [0, 4, +1] and lowered_3rd=[0,3,+1]
+
+//****************DRAFT***************//
 
 function drop2(chord) {
     newchord = [chord[0], chord[1], chord[2], chord[3]] //we keep root,3rd, 5th and 7th
