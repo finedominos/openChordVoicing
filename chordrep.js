@@ -1,7 +1,8 @@
 //The notes are being represented starting from number 1!
 
-//rename
-var chromatic = {
+//Numeric representation of chromatic notes within one octave
+//Possible to add C## and similar combinations. In that case, adjust the functions below
+var chromaticNoteRepresentation = {
     'B#': 1,
     'C♮': 1,
     'C#': 2,
@@ -25,8 +26,8 @@ var chromatic = {
     'Cb': 12,
 };
 
-//rename
-var diatonic = {
+//Numeric representation of diatonic notes within one octave
+var diatonicNoteRepresentation = {
     'C': 1,
     'D': 2,
     'E': 3,
@@ -36,12 +37,11 @@ var diatonic = {
     'B': 7
 };
 
-
-function chordToTemplate(chord) {
-    //Building a numeric template for the type of chord chosen - in both chromatic and diatonic representation
+//Building a numeric template for the type of chord chosen - in both chromatic and diatonic representation
+//The structure of a template is a 2D array: [diatonicNotePosition][chromaticNotePosition], e.g. for major chord [1,3,5][1,4,8]
+function chordTypeToTemplate(chord) {
     //console.log(chord.print);
-    //var root = firstOct[chord.root];
-    //figure out how to use the info about root here as well
+    //figure out how to use the info about root here as well    //var root = firstOct[chord.root];
     var template = [
         [1],
         [1]
@@ -75,60 +75,68 @@ function chordToTemplate(chord) {
     return template;
 }
 
-function find_val(dict, value) {
+//Generic function for finding a value in a dictionary
+//For now, used within the find_note function to return all possible chromatic representations of a numeric value
+//Example: for the input of value 11 and the chromatic dictionary, the function will return ['A#', 'Bb']
+function find_val(dictionary, value) {
     arr = [];
-    for (d in dict) {
-        if (dict[d] == value) {
+    for (d in dictionary) {
+        if (dictionary[d] == value) {
             arr.push(d);
         }
     }
     return arr;
 }
 
-//finding the chromatic name of note (A# or Bb)
-function find_note(dnote, chpos) {
-    arr = find_val(chromatic, chpos);
+//Finding the chromatic name of note from its numeric representation (is it A# or Bb?)
+function find_note(diatonicNote, chromaticPosition) {
+    arr = find_val(chromaticNoteRepresentation, chromaticPosition); //returns the 
     for (a in arr) {
         //console.log(dnote, arr[a], arr[a].charAt(0));    
-        if (arr[a].charAt(0) == dnote) {
+        if (arr[a].charAt(0) == diatonicNote) {
             return arr[a];
         }
     }
 }
 
-//representing the notes in the sheet according to numbers [1-85]
-//chTemplate is a 2d array [diatonic][chromatic] e.g. [1,3,5][1,4,8]
-function makeChord(positions1_85, root, chTemplate) {
+//To be changed when we restrict the range of possible notes!
+//Building a chord suitable for the sheet representation,from having its full range numeric representation, its root and the according chord type template
+//The structure of a chord template is a 2D array: [diatonicNotePosition][chromaticNotePosition], e.g. for major chord [1,3,5][1,4,8]
+//ChordNotesFullRange: chord notes represented in numbers of the whole considered range (currently from 1 to 85, where 1 stands for C1, while 85 stands for C5)
+function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
     chord = [];
-    for (i = 0; i < positions1_85.length; i++) {
-        newChromatic = (positions1_85[i]) % 12;
+    for (i = 0; i < chordNotesFullRange.length; i++) {
+
+        //Computing the numeric position of the note within one octave
+        newChromatic = (chordNotesFullRange[i]) % 12;
         if (newChromatic == 0) newChromatic = 12;
 
-        for (j = 0; j < (chTemplate[0]).length; j++) {
-            chNote = (chTemplate[1][j] + chromatic[root] - 1) % 12;
+        //Computing the diatonic note numerical representation by comparing with the chord root and the note's position (role) in a chord type template
+        for (j = 0; j < (chordTypeTemplate[1]).length; j++) {
+            chNote = (chordTypeTemplate[1][j] + chromaticNoteRepresentation[chordRoot] - 1) % 12; //checking for all notes in a template whether they fit
             if (chNote == 0) chNote = 12;
             if (chNote == newChromatic) {
-                newDiatonic = (chTemplate[0][j] + diatonic[root.charAt(0)] - 1) % 7;
+                newDiatonic = (chordTypeTemplate[0][j] + diatonicNoteRepresentation[chordRoot.charAt(0)] - 1) % 7;
                 if (newDiatonic == 0) newDiatonic = 7;
             }
         }
-        OctNumber = Math.floor(positions1_85[i] / 12);
+        //Computing the octave in which the note is - TO BE CHANGED IF THE OCTAVES ARE RESTRICTED?
+        OctNumber = Math.floor(chordNotesFullRange[i] / 12);
 
-        newNote = find_note(find_val(diatonic, newDiatonic), newChromatic);
+        newNote = find_note(find_val(diatonicNoteRepresentation, newDiatonic), newChromatic);
         newNote += OctNumber;
         chord[i] = newNote;
     }
     return chord;
 }
 
+//Representing the chord in a way suitable for the music sheet
 function ChordToSheet(chord) {
-    notesChord = [
-        []
-    ];
-    console.log(notesChord);
+    notesChord = [[]];
+    //console.log(notesChord);
     for (n in chord) {
         alt = '';
-        console.log(chord[n]);
+        //console.log(chord[n]);
         switch (chord[n].charAt(1)) {
             case '#':
                 alt = '+1';
@@ -139,39 +147,47 @@ function ChordToSheet(chord) {
             default:
                 alt = '0';
         }
-        notesChord[n] = [diatonic[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(2)) + 1, alt]
+        notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(2)) + 1, alt]
     }
     return notesChord;
 }
 
-function ChordListToSheet(chordList, chordPositionsList) {
+//Represeting the total array of chords in a way suitable for the music sheet
+//ChordsList is an array of chords as generic objects, while chordsNotePositionsList is an array of numerical representations of specific voicings
+function ChordListToSheet(chordsList, chordsNotePositionsList) {
     finalChordList = [];
-    for (var i = 0; i < chordList.length; i++) {
-        template = chordToTemplate(chordList[i]);
-        console.log("template", template);
-        console.log("chordList: ", chordList);
-        console.log("chordPositionsList: ", chordPositionsList);
 
-        finalChordList.push(ChordToSheet(makeChord(chordPositionsList[i], chordList[i].root, template)));
+    console.log("chordsList: ", chordsList);
+    //console.log("chordsNotePositionsList: ", chordsNotePositionsList);
+
+    for (var i = 0; i < chordsList.length; i++) {
+        template = chordTypeToTemplate(chordsList[i]);
+        
+        builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
+        finalChordList.push(ChordToSheet(builtChord));
+        
+        //console.log("chordTypeTemplate", template);
     }
     createSheet(finalChordList);
+    console.log("finalChordList", finalChordList);
 }
 
 
 
-/*old
+/*OLD - TO BE DELETED
+
 function make_chord(root, type){
     chord = [[]];
     chord[0]=chordTypes[type][0];
     chord[1]=[];
     for (pos in chord[0]){
-        newDiatonic = (diatonic[root.charAt(0)] + chord[0][pos] - 1) % 7;
+        newDiatonic = (diatonicNoteRepresentation[root.charAt(0)] + chord[0][pos] - 1) % 7;
         if (newDiatonic == 0) newDiatonic = 7;
-        console.log(pos, newDiatonic, find_val(diatonic, newDiatonic));
-        newChromatic = (chromatic[root] + chordTypes[type][1][pos] - 1) % 12;
+        console.log(pos, newDiatonic, find_val(diatonicNoteRepresentation, newDiatonic));
+        newChromatic = (chromaticNoteRepresentation[root] + chordTypes[type][1][pos] - 1) % 12;
         if (newChromatic == 0) newChromatic = 12;
-        newNote = find_note(find_val(diatonic, newDiatonic), newChromatic);
-        console.log(find_val(diatonic, newDiatonic), newChromatic, newNote);
+        newNote = find_note(find_val(diatonicNoteRepresentation, newDiatonic), newChromatic);
+        console.log(find_val(diatonicNoteRepresentation, newDiatonic), newChromatic, newNote);
         chord[1][pos] = newNote;
     }
     return chord;
@@ -187,7 +203,7 @@ function chordAliette(chord){
             case 'b': alt = '-1'; break; 
             default: alt = '0';
         }
-        notesChord[n] = [diatonic[chord[1][n].charAt(0)], 4, alt]
+        notesChord[n] = [diatonicNoteRepresentation[chord[1][n].charAt(0)], 4, alt]
         console.log(notesChord);
     }
     return notesChord;
