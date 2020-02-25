@@ -4,15 +4,6 @@ var vueCollection = [];
 var chordCollection = [];
 printed = 0;
 
-function computeLabel() {
-    label = '';
-    vueCollection.forEach(element => {
-        if (element.print != '/' && element.print != '5' && element.print != 'M')
-            label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
-
-    });
-    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
-}
 
 //Temporary needed function
 //// This function is not mine, found at https://github.com/Daplie/knuth-shuffle
@@ -55,7 +46,9 @@ function computeChord() {
 
 
 
-// CREATING THE VUE WITH TEMPLATE
+// CREATING THE VUE MODEL WITH TEMPLATE.
+// We use a Vue model for the chord selection block (<div id='chordPicking'>), 
+// as it is the interractive part of the page.
 
 const LinearPillbar = {
     el: ".row",
@@ -184,7 +177,10 @@ LinearPillbar.propsData.options = [
 ]
 vue = new Vue(LinearPillbar);
 vueCollection.push(vue);
+//end of Vue creation
 
+
+//ADD BUTTON
 document.getElementById("addButton").onclick = function() {
     chordCollection.push(computeChord())
     var string = "";
@@ -194,12 +190,14 @@ document.getElementById("addButton").onclick = function() {
     document.getElementById("contentSequencePrinting").innerHTML = string;
 };
 
+//RESET BUTTON
 document.getElementById("resetButton").onclick = function() {
     cleanSheet()
     chordCollection = []
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
+// GO BUTTON : here is call the algorithmic part of the project, to compute our voicings.
 document.getElementById("goButton").onclick = function() {
     positionsList = (naive(chordCollection)); // from script naive.js
     shuffledPosList = [];
@@ -208,7 +206,7 @@ document.getElementById("goButton").onclick = function() {
         shuffledPosList[i] = shuffle(positionsList[i]);
         chordsPosList[i] = shuffledPosList[i][0];
     }
-    printChordOnKeyboard([shuffledPosList[0][printed]]);
+    printChordOnKeyboard([shuffledPosList[0][printed]]);    // from script keyboard.js
 
     console.log("shuffledPosList: ", shuffledPosList);
     console.log("chordPosList: ", chordsPosList);
@@ -218,14 +216,28 @@ document.getElementById("goButton").onclick = function() {
     //HERE INSERT THE AFFECTATION OF THE BUTTON TO THE FUNCTION AUDIO//
 };
 
+// NEXT BUTTON (TEMPORARY)
 document.getElementById("nextButton").onclick = function() {
     if (positionsList) {
         printed += 1
-        printChordOnKeyboard([positionsList[printed]])
+        printChordOnKeyboard([positionsList[printed]])      // from script keyboard.js
     }
 };
 
 
+// Compute the english notation of the chord, such as C#7b9, and print it in the dedicated block.
+function computeLabel() {
+    label = '';
+    vueCollection.forEach(element => {
+        if (element.print != '/' && element.print != '5' && element.print != 'M')
+            // English notation ignore some elements such as ♮, etc
+            label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
+
+    });
+    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
+}
+
+// Updating the block every 300ms
 setInterval(() => {
     computeLabel()
 }, 300);
