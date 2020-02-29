@@ -2,47 +2,8 @@ console.log("loaded");
 
 var vueCollection = [];
 var chordCollection = [];
-printed = 0;
-
-
-//Temporary needed function
-//// This function is not mine, found at https://github.com/Daplie/knuth-shuffle
-function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-function computeChord() {
-    label = '';
-    chord = {};
-    vueCollection.forEach(element => {
-        if (element.print != '/' && element.print != '5' && element.print != 'M')
-            label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
-
-        prop = element.type;
-        chord = Object.assign(chord, { prop: element.print });
-        chord[element.type] = element.print;
-
-    });
-    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
-    delete chord.prop;
-    chord["print"] = label;
-    console.log(chord);
-    return chord;
-}
+dropChosen = '';
+printed = 0;    // will be remove with button next
 
 
 
@@ -86,6 +47,10 @@ const LinearPillbar = {
                     value += element.name;
                 }
             });
+            if(this.type == 'drop'){
+                dropChosen = value;
+                console.log(dropChosen)
+            }
             return value;
         },
         type() {
@@ -177,11 +142,44 @@ LinearPillbar.propsData.options = [
 ]
 vue = new Vue(LinearPillbar);
 vueCollection.push(vue);
+
+LinearPillbar.propsData.options = [
+    { name: 'drop2', group: 'drop', selected: true },
+    { name: 'drop3', group: 'drop' },
+    { name: 'drop4', group: 'drop' },
+]
+vue = new Vue(LinearPillbar);
+vueCollection.push(vue);
 //end of Vue creation
 
 
+
+// Compute the properties of the chord when adding it, and put it in an object 'chord', ready to be serve the algorithmic part.
+function computeChord() {
+    label = '';
+    chord = {};
+    vueCollection.forEach(element => {
+        if(element.type != 'drop'){
+            if (element.print != '/' && element.print != '5' && element.print != 'M')
+                label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
+    
+            prop = element.type;
+            chord = Object.assign(chord, { prop: element.print });
+            chord[element.type] = element.print;
+        }
+
+    });
+    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
+    delete chord.prop;
+    chord["print"] = label;
+    console.log(chord);
+    return chord;
+}
+
+// BUTTONS //
+
 //ADD BUTTON
-document.getElementById("addButton").onclick = function() {
+document.getElementById("addButton").onclick = function () {
     chordCollection.push(computeChord())
     var string = "";
     chordCollection.forEach(element => {
@@ -191,15 +189,19 @@ document.getElementById("addButton").onclick = function() {
 };
 
 //RESET BUTTON
-document.getElementById("resetButton").onclick = function() {
+document.getElementById("resetButton").onclick = function () {
     cleanSheet()
     chordCollection = []
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
 // GO BUTTON : here is call the algorithmic part of the project, to compute our voicings.
-document.getElementById("goButton").onclick = function() {
-    positionsList = (naive(chordCollection)); // from script naive.js
+document.getElementById("goButton").onclick = function () {
+    if(chordCollection.length==0){
+        alert('Add at least one chord.');
+        return;
+    }
+    positionsList = (naive(chordCollection, dropChosen)); // from script naive.js
     shuffledPosList = [];
     chordsPosList = [];
     for (var i = 0; i < positionsList.length; i++) {
@@ -217,7 +219,7 @@ document.getElementById("goButton").onclick = function() {
 };
 
 // NEXT BUTTON (TEMPORARY)
-document.getElementById("nextButton").onclick = function() {
+document.getElementById("nextButton").onclick = function () {
     if (positionsList) {
         printed += 1
         printChordOnKeyboard([positionsList[printed]])      // from script keyboard.js
@@ -225,13 +227,16 @@ document.getElementById("nextButton").onclick = function() {
 };
 
 
-// Compute the english notation of the chord, such as C#7b9, and print it in the dedicated block.
+
+// Compute the english notation of the chord, such as C#7b9, and print it in the dedicated block (in real time).
 function computeLabel() {
     label = '';
     vueCollection.forEach(element => {
-        if (element.print != '/' && element.print != '5' && element.print != 'M')
+        if (element.print != '/' && element.print != '5' && element.print != 'M' && element.type != 'drop')
+        {
             // English notation ignore some elements such as ♮, etc
             label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
+        }
 
     });
     document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
@@ -241,3 +246,25 @@ function computeLabel() {
 setInterval(() => {
     computeLabel()
 }, 300);
+
+
+
+//Temporary needed function
+//// This function is not mine, found at https://github.com/Daplie/knuth-shuffle
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}

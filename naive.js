@@ -28,7 +28,7 @@ var firstOct = {
 var listCombinationsChord = [];
 var iterationList = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // we don't want the for in the recursive to always manipulate the same index..
 
-function naive(chordSequence) {
+function naive(chordSequence, dropChosen) {
     alert("lets go with a sequence of " + chordSequence.length + " chords")
     var chordSequenceNotSpread = [];
     chordSequence.forEach(chord => {
