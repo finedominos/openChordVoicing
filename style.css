@@ -88,10 +88,22 @@ h1 {
     color: white;
 }
 
+#sequencePrinting{
+    padding-top: 50px;
+}
+
 #finalButtons {
     padding-top: 70px;
 }
-
+#finalButtons .button {
+    margin-top: 8px;
+    
+}
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* end of Sequence of chord building*/
 
