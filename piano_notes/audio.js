@@ -19,6 +19,7 @@ function play_sheet_formG4(sheet) {
     audio_button.classList.add("can_not_be_pushed");
     for (var chord_numero in sheet) {
         chord = sheet[chord_numero];
+        console.log(chord);
         setTimeout(play_chord, chord_numero * 3500, chord);
     }
     setTimeout(wait_to_push, (sheet.length - 1) * 3500);
@@ -41,20 +42,34 @@ const E4 = new Audio('piano_notes/Piano.ff.E4.wav');
 const D4 = new Audio('piano_notes/Piano.ff.D4.wav');
 const Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
 
-note_list_G4_to_61 = [Db4, D4, E4, F4, Gb4, G4];
+//2nd scale - 3 seconds length
+const C2 = new Audio('piano_notes/Piano.ff.C2r.wav');
+const Db2 = new Audio('piano_notes/Piano.ff.Db2r.wav');
+const D2 = new Audio('piano_notes/Piano.ff.D2r.wav');
+const E2 = new Audio('piano_notes/Piano.ff.E2r.wav');
+const Eb2 = new Audio('piano_notes/Piano.ff.Eb2r.wav');
+const F2 = new Audio('piano_notes/Piano.ff.F2r.wav');
+const Gb2 = new Audio('piano_notes/Piano.ff.Gb2r.wav');
+const G2 = new Audio('piano_notes/Piano.ff.G2r.wav');
+const Ab2 = new Audio('piano_notes/Piano.ff.Ab2r.wav');
+const A2 = new Audio('piano_notes/Piano.ff.A2r.wav');
+const Bb2 = new Audio('piano_notes/Piano.ff.Bb2.wav');
+const B2 = new Audio('piano_notes/Piano.ff.B2r.wav');
 
-//TO MAKE RIGHT ONCE WE KNOW EXACTLY OUR RANGE//
-//TO FINALIZE : 37_to_C4//
 
-//convert chordsPosList (61,88..) into "E4", "G4"..
+const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, ];
+// to add : C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4, Db4, D4, Eb4, E4, F4, Gb4, G4, Ab4, A4, Bb4, B4,C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5,C6, Db6, D6, Eb6, E6, F6, Gb6, G6, Ab6, A6, Bb6, B6]
+
+//Converting chordsPosList = [ [61,88], [13] ] into [ [E4,G4], [C2] ]
 function num_to_note(num) {
     var new_vec = [];
     for (var ch in num) {
         chord = num[ch];
-        new_vec = [new_vec, []];
+        new_chord = [];
         for (var no in chord) {
-            new_vec[ch][no] = note_list_G4_to_61[num[ch][no] % 6];
+            new_chord[no] = note_list_G4_to_61[num[ch][no] - 13];
         }
+        new_vec[ch] = new_chord;
     }
     return new_vec;
 }
