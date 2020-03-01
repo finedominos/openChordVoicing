@@ -30,9 +30,16 @@ var iterationList = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // we don't want
 
 function naive(chordSequence, dropChosen) {
     alert("lets go with a sequence of " + chordSequence.length + " chords")
+
+    // firstChord = chordToKeyList(chordSequence[0], true, dropChosen)
+    // after that let's built naivly the other chords and match one by one with a function that compute distances and keep the one with the shortest
+    // like : nextChord = keepBest(chordN, allPossibleChordN+1, ?otherParameter)
+    // to help better selection of possible chords before computing all distances, a preselection concerning the highest tone of the chord
+    // will be performed, as we think a voicing of a chord sequence is nice first of all when the highest tone creates a conjoint melody.
+
     var chordSequenceNotSpread = [];
     chordSequence.forEach(chord => {
-        var keyList = chordToKeyList(chord)
+        var keyList = chordToKeyList(chord, false, dropChosen)
         chordSequenceNotSpread.push(keyList)
         console.log("original chord : " + keyList);
     });
@@ -91,7 +98,7 @@ function compute(baseKeyListOctave1) {
     // Filtrating chords that are inaccessible, or accessibles with only one hand, or extremely too much spread :
     var listCombinationsFirstChordAccessibleBothHands = [];
     listCombinationsChord.forEach(chord => {
-        if (accessibleBothHands(chord)) {
+        if (reasonnableRange(chord)) {
             listCombinationsFirstChordAccessibleBothHands.push(chord);
         }
     });
@@ -114,29 +121,37 @@ function compute(baseKeyListOctave1) {
 
 
 
-function chordToKeyList(chord) {
+function chordToKeyList(chord, firstChord, dropChosen) {
     //returning the chord played in a close way (not spread) on the first octave
+    // Let's also built here the first chord
     console.log(chord.print);
-    var root = firstOct[chord.root];
-    var keyList = [root];
-    keyList.push(chord.color == "M" ? root + 4 : (chord.color == "m" ? root + 3 : root + 7))    //if powerchord, don't play third but play the fifth, that cannot being alterated in principle
-    
-    if (chord.seventh != "/") {
-        keyList.push(chord.seventh == "7" ? root + 10 : root + 11)
+    if(!firstChord){
+        var root = firstOct[chord.root];
+        var keyList = [root];
+        keyList.push(chord.color == "M" ? root + 4 : (chord.color == "m" ? root + 3 : root + 7))    //if powerchord, don't play third but play the fifth, that cannot being alterated in principle
+        
+        if (chord.fifth != "5") {
+            keyList.push(chord.fifth == "b5" ? root + 6 : root + 8)
+        }else{
+            keyList.push(root + 7)
+        }
+        if (chord.seventh != "/") {
+            keyList.push(chord.seventh == "7" ? root + 10 : root + 11)
+        }
+        if (chord.ninth != "/") {
+            keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
+        }
+        if (chord.eleventh != "/") {
+            keyList.push(chord.eleventh == "11" ? root + 17 : root + 18)
+        }
+        if (chord.thirteenth != "/") {
+            keyList.push(chord.thirteenth == "13" ? root + 21 : root+20)
+        }
+        return keyList;
     }
-    if (chord.ninth != "/") {
-        keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
+    else{
+        return 0;
     }
-    if (chord.eleventh != "/") {
-        keyList.push(chord.eleventh == "11" ? root + 17 : root + 18)
-    }
-    if (chord.thirteenth != "/") {
-        keyList.push(chord.thirteenth == "13" ? root + 21 : root+20)
-    }
-    if (chord.fifth != "5") {
-        keyList.push(chord.fifth == "b5" ? root + 6 : root + 8)
-    }
-    return keyList;
 }
 
 function recursiveCombinationsCreation(baseKeyList, indexBrowsing, rootsOctave) {
@@ -156,28 +171,30 @@ function recursiveCombinationsCreation(baseKeyList, indexBrowsing, rootsOctave) 
     }
 }
 
-function accessibleBothHands(chord, rangeOneHand = 16, maxRange = 46) {
+function reasonnableRange(chord, rangeOneHand = 16, maxRange = 46, maxNote = 61) {
     var min = Math.min(...chord);
     var max = Math.max(...chord);
-    var accessible = true;
 
     //Not accessible with just one hand, we wan't to spread a bit :
     if ((max - min) <= rangeOneHand) {
-        accessible = false;
+        return false;
         // console.log("one hand : "+chord)
     }
     if ((max - min) > maxRange) {  //We don't want some extreme spreading
-        accessible = false;
+    return false;
         // console.log("too much spread : "+chord)
     }
     // console.log(min+"to"+max+" so "+(max-min))
     chord.forEach(note => {
         if (note > min + rangeOneHand && note < max - rangeOneHand) {
-            accessible = false;
+            return false;
+        }
+        if (note>maxNote){
+            return false;
         }
     });
     // console.log(chord+(accessible ? " : yes":" : NOPE"))
-    return accessible;
+    return true;
 
 }
 
@@ -185,9 +202,16 @@ function accessibleBothHands(chord, rangeOneHand = 16, maxRange = 46) {
 function notTooLittleIntervalInLowFrequency(chord) {
     var nonDissonnant = true
     var min = Math.min(...chord);
-    if (min < 25) {
+    if (min < 21) {
         chord.forEach(key => {
             if (key > min && key < (min + 9)) {
+                nonDissonnant = false;
+            }
+        });
+    }
+    else if (min < 30) {
+        chord.forEach(key => {
+            if (key > min && key < (min + 5)) {
                 nonDissonnant = false;
             }
         });
