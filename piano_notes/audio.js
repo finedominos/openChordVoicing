@@ -34,15 +34,7 @@ audio_button.onclick = play_sheet_button;
 
 //***************************BANK OF NOTES - 3 seconds each**************************//
 
-const G4 = new Audio('piano_notes/Piano.ff.G4ready03.wav');
-const Gb4 = new Audio('piano_notes/Piano.ff.Gb4ready03.wav');
-const F4 = new Audio('piano_notes/Piano.ff.F4ready03.wav');
-const E4 = new Audio('piano_notes/Piano.ff.E4.wav');
-//const Eb4 = new Audio('piano_notes/Piano.ff.Eb4.wav');
-const D4 = new Audio('piano_notes/Piano.ff.D4.wav');
-const Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
-
-//2nd scale - 3 seconds length
+//Scales 2-3-4-5-6 - 3 seconds length
 const C2 = new Audio('piano_notes/Piano.ff.C2r.wav');
 const Db2 = new Audio('piano_notes/Piano.ff.Db2r.wav');
 const D2 = new Audio('piano_notes/Piano.ff.D2r.wav');
@@ -56,8 +48,29 @@ const A2 = new Audio('piano_notes/Piano.ff.A2r.wav');
 const Bb2 = new Audio('piano_notes/Piano.ff.Bb2.wav');
 const B2 = new Audio('piano_notes/Piano.ff.B2r.wav');
 
+const C3 = new Audio('piano_notes/Piano.ff.C3r.wav');
+const Db3 = new Audio('piano_notes/Piano.ff.Db3r.wav');
+const D3 = new Audio('piano_notes/Piano.ff.D3r.wav');
+const E3 = new Audio('piano_notes/Piano.ff.E3r.wav');
+const Eb3 = new Audio('piano_notes/Piano.ff.Eb3r.wav');
+const F3 = new Audio('piano_notes/Piano.ff.F3r.wav');
+const Gb3 = new Audio('piano_notes/Piano.ff.Gb3r.wav');
+const G3 = new Audio('piano_notes/Piano.ff.G3r.wav');
+const Ab3 = new Audio('piano_notes/Piano.ff.Ab3r.wav');
+const A3 = new Audio('piano_notes/Piano.ff.A3r.wav');
+const Bb3 = new Audio('piano_notes/Piano.ff.Bb3.wav');
+const B3 = new Audio('piano_notes/Piano.ff.B3r.wav');
 
-const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, ];
+const G4 = new Audio('piano_notes/Piano.ff.G4ready03.wav');
+const Gb4 = new Audio('piano_notes/Piano.ff.Gb4ready03.wav');
+const F4 = new Audio('piano_notes/Piano.ff.F4ready03.wav');
+const E4 = new Audio('piano_notes/Piano.ff.E4.wav');
+//const Eb4 = new Audio('piano_notes/Piano.ff.Eb4.wav');
+const D4 = new Audio('piano_notes/Piano.ff.D4.wav');
+const Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
+
+
+const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, ];
 // to add : C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4, Db4, D4, Eb4, E4, F4, Gb4, G4, Ab4, A4, Bb4, B4,C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5,C6, Db6, D6, Eb6, E6, F6, Gb6, G6, Ab6, A6, Bb6, B6]
 
 //Converting chordsPosList = [ [61,88], [13] ] into [ [E4,G4], [C2] ]
