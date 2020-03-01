@@ -222,7 +222,7 @@ document.getElementById("goButton").onclick = function () {
 document.getElementById("nextButton").onclick = function () {
     if (positionsList) {
         printed += 1
-        printChordOnKeyboard([positionsList[printed]])      // from script keyboard.js
+        printChordOnKeyboard([shuffledPosList[0][printed]])      // from script keyboard.js
     }
 };
 
