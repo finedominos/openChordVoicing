@@ -61,16 +61,20 @@ const A3 = new Audio('piano_notes/Piano.ff.A3r.wav');
 const Bb3 = new Audio('piano_notes/Piano.ff.Bb3.wav');
 const B3 = new Audio('piano_notes/Piano.ff.B3r.wav');
 
-const G4 = new Audio('piano_notes/Piano.ff.G4ready03.wav');
-const Gb4 = new Audio('piano_notes/Piano.ff.Gb4ready03.wav');
-const F4 = new Audio('piano_notes/Piano.ff.F4ready03.wav');
-const E4 = new Audio('piano_notes/Piano.ff.E4.wav');
-//const Eb4 = new Audio('piano_notes/Piano.ff.Eb4.wav');
-const D4 = new Audio('piano_notes/Piano.ff.D4.wav');
-const Db4 = new Audio('piano_notes/Piano.ff.Db4.wav');
+const C4 = new Audio('piano_notes/Piano.ff.C4r.wav');
+const Db4 = new Audio('piano_notes/Piano.ff.Db4r.wav');
+const D4 = new Audio('piano_notes/Piano.ff.D4r.wav');
+const E4 = new Audio('piano_notes/Piano.ff.E4r.wav');
+const Eb4 = new Audio('piano_notes/Piano.ff.Eb4r.wav');
+const F4 = new Audio('piano_notes/Piano.ff.F4r.wav');
+const Gb4 = new Audio('piano_notes/Piano.ff.Gb4r.wav');
+const G4 = new Audio('piano_notes/Piano.ff.G4r.wav');
+const Ab4 = new Audio('piano_notes/Piano.ff.Ab4r.wav');
+const A4 = new Audio('piano_notes/Piano.ff.A4r.wav');
+const Bb4 = new Audio('piano_notes/Piano.ff.Bb4.wav');
+const B4 = new Audio('piano_notes/Piano.ff.B4r.wav');
 
-
-const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, ];
+const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4];
 // to add : C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4, Db4, D4, Eb4, E4, F4, Gb4, G4, Ab4, A4, Bb4, B4,C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5,C6, Db6, D6, Eb6, E6, F6, Gb6, G6, Ab6, A6, Bb6, B6]
 
 //Converting chordsPosList = [ [61,88], [13] ] into [ [E4,G4], [C2] ]
