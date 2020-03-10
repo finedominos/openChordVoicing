@@ -89,9 +89,8 @@ const B5 = new Audio('piano_notes/Piano.ff.B5r.wav');
 
 const C6 = new Audio('piano_notes/Piano.ff.C6r.wav');
 
-
+//scale 2,3,4,5 with C6, 5 with C6, 5 with C6 (goes from note 13 to 61, and scale 5 is added 3 times temporary)
 const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4, C5,  Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6, Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6, Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6 ];
-// to add : C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4, Db4, D4, Eb4, E4, F4, Gb4, G4, Ab4, A4, Bb4, B4,C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5,C6, Db6, D6, Eb6, E6, F6, Gb6, G6, Ab6, A6, Bb6, B6]
 
 //Converting chordsPosList = [ [61,88], [13] ] into [ [E4,G4], [C2] ]
 function num_to_note(num) {

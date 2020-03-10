@@ -35,8 +35,7 @@ function createElementofNote(n, i, id) {
 }
 
 //notes where other bars are needed (04 is C of octave 4)
-const bar_m_needed = ['04', '55', '22']
-const bar_low_needed = ['05', '55', '22']
+const bar_m_needed = ['04', '55', '22', '06', '02'] //C4, A5, E2, C6, C2
 
 //prints the note n = [0,4,+1] for ex, at position i, with a shift for adjacents notes
 function createNote(n, i, shift) {
@@ -53,10 +52,11 @@ function createNote(n, i, shift) {
         createElementofNote(n, i - 0.10, '#flat')
     }
     if (shift == "shift") { j = i + 0.14 } else { createElementofNote(n, i, '#going_up_bar') }
-    //if (n[1] > 5) { createElementofNote(n, i, '#going_down_bar') } else { createElementofNote(n, i, '#going_up_bar') }
     createElementofNote(n, j, '#note')
     var a = n[0].toString() + n[1].toString()
     if (bar_m_needed.includes(a)) { createElementofNote(n, j, '#bar_mid') }
+    if (a == '65' || a == '06') { createElementofNote([5, 5, 0], j, '#bar_mid') }
+    if (a == '12' || a == '02') { createElementofNote([2, 2, 0], j, '#bar_mid') }
 }
 
 //prints the chord in position i
