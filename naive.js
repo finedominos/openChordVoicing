@@ -29,30 +29,150 @@ var listCombinationsChord = [];
 var iterationList = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // we don't want the for in the recursive to always manipulate the same index..
 
 function naive(chordSequence, dropChosen) {
-    alert("lets go with a sequence of " + chordSequence.length + " chords")
+    alert("lets go with a sequence of " + chordSequence.length + " chords with the following drop for the first chord : " + dropChosen)
 
-    // firstChord = chordToKeyList(chordSequence[0], true, dropChosen)
-    // after that let's built naivly the other chords and match one by one with a function that compute distances and keep the one with the shortest
-    // like : nextChord = keepBest(chordN, allPossibleChordN+1, ?otherParameter)
+
+    // We create the first chord with the chosen voicing, and then compute all possibilities of voicing for the other chords of the sequence.
+    // From here, after different filters, we try to find, for each chord of the sequence (except the first one),
+    // the voicing that is the clothest one from the previous voicing (determined the iteration before)
+
+    var firstChord = chordToKeyList(chordSequence[0], true, dropChosen);
+    var finalSequence = [firstChord];
+    
+    console.log("First chord : " + firstChord);
+
+    //we need chordSequence without the first chord to treat différently the other chords
+    chordSequenceFollowing = chordSequence.slice();
+    chordSequenceFollowing.shift();
+
+
+    var chordSequenceNotSpread = [];
+    chordSequenceFollowing.forEach(chord => {
+        var keyList = chordToKeyList(chord, false, dropChosen)
+        chordSequenceNotSpread.push(keyList)
+        console.log("following chord not spread : " + keyList);
+    });
+
+    chordSequenceFollowingFinalList = []
+    chordSequenceNotSpread.forEach(chord => {
+        chordSequenceFollowingFinalList.push([...compute(chord)])
+    });
+    console.log("All possibilities (a bit) filtered for each chord of the sequence : ");
+    console.log(chordSequenceFollowingFinalList)
+
+    // Here we have, for each chord of the sequence (except the first), all the possibilities of voicing matching our feasibility constraints (see filters in compute() )
+
+    // we need, for each chord of the voicing, to pick the best voicing among all possibilities still running.
+    // example : nextChord = keepBest(chordN, allPossibleChordN+1, ?otherParameter) //then add to finalSequence
     // to help better selection of possible chords before computing all distances, a preselection concerning the highest tone of the chord
     // will be performed, as we think a voicing of a chord sequence is nice first of all when the highest tone creates a conjoint melody.
 
-    var chordSequenceNotSpread = [];
-    chordSequence.forEach(chord => {
-        var keyList = chordToKeyList(chord, false, dropChosen)
-        chordSequenceNotSpread.push(keyList)
-        console.log("original chord : " + keyList);
+    console.log("************************* big computation part *****************************")
+
+    var chordPointed = firstChord;
+    chordSequenceFollowingFinalList.forEach(listPossibilitiesNextChord => {
+        chordPointed = keepBestVoicing(chordPointed, listPossibilitiesNextChord);
+        finalSequence.push(chordPointed);
     });
 
-    chordSequenceFinalList = []
-    chordSequenceNotSpread.forEach(chord => {
-        chordSequenceFinalList.push([...compute(chord)])
-    });
-    console.log("total sequence : ");
-    console.log(chordSequenceFinalList)
-    
-    return (chordSequenceFinalList)
+    console.log("final sequence : ");
+    console.log(finalSequence);
+    return (finalSequence)
+}
 
+function keepBestVoicing(chordN, allPossibilitiesNextChord){
+    // First, no need to keep a possibility if its higher tone is far from the higher one of ChordN. Voicings create melody.
+    var allKeptPossibilities = [];
+    allPossibilitiesNextChord.forEach(possibility => {
+        if(Math.abs(Math.max(...chordN)-Math.max(...possibility))<=3){
+            allKeptPossibilities.push(possibility);
+        }
+    });
+    console.log("initial number possibilities : "+ allPossibilitiesNextChord.length);
+    console.log("number of possibilities after melody filter : "+ allKeptPossibilities.length);
+
+    // NOT FINISHED
+
+    return(allKeptPossibilities[0])
+}
+
+
+function chordToKeyList(chord, firstChord, dropChosen) {
+    //returning the chord played in a close way (not spread) on the first octave
+    // Let's also built here the first chord
+
+    var root = firstOct[chord.root];
+
+    //we are going to check a lot of time if we selected a power chord, so let's create a boolean
+    var powerchord = false;
+    if (chord.color == 'pow') {
+        powerchord = true;
+    }
+    if (firstChord) {
+        do {
+            root += 12
+        } while (root < 24)
+    }
+    var keyList = [root];
+    if (!powerchord) {         //if not powerchord, we put the 3rd
+        keyList.push(chord.color == "M" ? root + 4 : root + 3)
+    }
+
+    //normal 5th is more current, so we keep it for the default case (root+7).
+    keyList.push(chord.fifth == "#5" ? root + 8 : (chord.fifth == "b5" ? root + 6 : root + 7))
+
+
+    if (chord.seventh != "/") {
+        keyList.push(chord.seventh == "7" ? root + 10 : root + 11)
+    }
+    if (chord.ninth != "/") {
+        keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
+    }
+    if (chord.eleventh != "/") {
+        keyList.push(chord.eleventh == "11" ? root + 17 : root + 18)
+    }
+    if (chord.thirteenth != "/") {
+        keyList.push(chord.thirteenth == "13" ? root + 21 : root + 20)
+    }
+
+    if (firstChord) {
+        switch (dropChosen) {
+            case 'drop2':           // drop2 : lower the 5th
+                if (!powerchord) {    // if not powerchord, the 5th is at the 3rd position in keyList
+                    keyList[2] -= 12
+                }
+                else {               // otherwise in 2nd position (1st being the root)
+                    keyList[1] -= 12
+                }
+                break;
+            case 'drop3':           // drop3 : lower the 3rd
+                if (!powerchord) {
+                    keyList[1] -= 12
+                }
+                else {   // if powerchord, there is no 3rd
+                    alert("drop 3 on a powerchord make no sense, you have no third.. :'(")
+                }
+                break;
+            case 'drop24':          // drop 24 : lower the root and the 5th.
+                if (!powerchord) {
+                    keyList[0] -= 12
+                    keyList[2] -= 12
+                }
+                else {
+                    keyList[0] -= 12
+                    keyList[1] -= 12
+                }
+                break;
+            default:
+                console.log('Sorry, unknown drop : "' + dropChosen + '"');
+        }
+        if(Math.max(...keyList)<49){        // In particulary if the first chord has no tension, it's played a bit too low without that.
+            for (var i = 0; i < keyList.length; i++) {
+                keyList[i] += 12;
+            }
+        }
+    }
+    return keyList;
 }
 
 function compute(baseKeyListOctave1) {
@@ -74,9 +194,9 @@ function compute(baseKeyListOctave1) {
     }
 
     // console.log(baseKeyListOctave1)      // First octave is too low
-    console.log(baseKeyListOctage2)
-    console.log(baseKeyListOctage3)
-    console.log(baseKeyListOctage4)
+    // console.log(baseKeyListOctage2)
+    // console.log(baseKeyListOctage3)
+    // console.log(baseKeyListOctage4)
 
     // listCombinationsFirstChord.push(baseKeyListOctave1);     // First octave is too low
     listCombinationsChord.push(baseKeyListOctage2);
@@ -91,6 +211,7 @@ function compute(baseKeyListOctave1) {
     recursiveCombinationsCreation(baseKeyListOctage3, 1, 3)
     recursiveCombinationsCreation(baseKeyListOctage4, 1, 4)
 
+    console.log("\n\nOne chord : ")
 
     console.log("all possible chords with root as the lower key : ")
     console.log(listCombinationsChord);
@@ -115,44 +236,10 @@ function compute(baseKeyListOctave1) {
     console.log("Not dissonant in low freq : ")
     console.log(listCombinationsNotDissonantInLowFreq)
 
-    return listCombinationsNotDissonantInLowFreq;
+    return listCombinationsNotDissonantInLowFreq;   // Final filtered list of possible voicings for the input chord.
 
 }
 
-
-
-function chordToKeyList(chord, firstChord, dropChosen) {
-    //returning the chord played in a close way (not spread) on the first octave
-    // Let's also built here the first chord
-    console.log(chord.print);
-    if(!firstChord){
-        var root = firstOct[chord.root];
-        var keyList = [root];
-        keyList.push(chord.color == "M" ? root + 4 : (chord.color == "m" ? root + 3 : root + 7))    //if powerchord, don't play third but play the fifth, that cannot being alterated in principle
-        
-        if (chord.fifth != "5") {
-            keyList.push(chord.fifth == "b5" ? root + 6 : root + 8)
-        }else{
-            keyList.push(root + 7)
-        }
-        if (chord.seventh != "/") {
-            keyList.push(chord.seventh == "7" ? root + 10 : root + 11)
-        }
-        if (chord.ninth != "/") {
-            keyList.push(chord.ninth == "9" ? root + 14 : (chord.ninth == "b9" ? root + 13 : root + 15))
-        }
-        if (chord.eleventh != "/") {
-            keyList.push(chord.eleventh == "11" ? root + 17 : root + 18)
-        }
-        if (chord.thirteenth != "/") {
-            keyList.push(chord.thirteenth == "13" ? root + 21 : root+20)
-        }
-        return keyList;
-    }
-    else{
-        return 0;
-    }
-}
 
 function recursiveCombinationsCreation(baseKeyList, indexBrowsing, rootsOctave) {
 
@@ -181,7 +268,7 @@ function reasonnableRange(chord, rangeOneHand = 16, maxRange = 46, maxNote = 61)
         // console.log("one hand : "+chord)
     }
     if ((max - min) > maxRange) {  //We don't want some extreme spreading
-    return false;
+        return false;
         // console.log("too much spread : "+chord)
     }
     // console.log(min+"to"+max+" so "+(max-min))
@@ -189,7 +276,7 @@ function reasonnableRange(chord, rangeOneHand = 16, maxRange = 46, maxNote = 61)
         if (note > min + rangeOneHand && note < max - rangeOneHand) {
             return false;
         }
-        if (note>maxNote){
+        if (note > maxNote) {
             return false;
         }
     });

@@ -146,7 +146,7 @@ vueCollection.push(vue);
 LinearPillbar.propsData.options = [
     { name: 'drop2', group: 'drop', selected: true },
     { name: 'drop3', group: 'drop' },
-    { name: 'drop4', group: 'drop' },
+    { name: 'drop24', group: 'drop' },
 ]
 vue = new Vue(LinearPillbar);
 vueCollection.push(vue);
