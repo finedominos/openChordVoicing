@@ -3,7 +3,7 @@ console.log("loaded");
 var vueCollection = [];
 var chordCollection = [];
 dropChosen = '';
-printed = 0;    // will be remove with button next
+printingIndex = 0;    // index of the chord printed on the keyboard
 
 
 
@@ -192,6 +192,7 @@ document.getElementById("addButton").onclick = function () {
 document.getElementById("resetButton").onclick = function () {
     cleanSheet()
     chordCollection = []
+    printingIndex = 0;
     document.getElementById("contentSequencePrinting").innerHTML = '';
 };
 
@@ -201,28 +202,31 @@ document.getElementById("goButton").onclick = function () {
         alert('Add at least one chord.');
         return;
     }
-    positionsList = (naive(chordCollection, dropChosen)); // from script naive.js
-    shuffledPosList = [];
-    chordsPosList = [];
-    for (var i = 0; i < positionsList.length; i++) {
-        shuffledPosList[i] = shuffle(positionsList[i]);
-        chordsPosList[i] = shuffledPosList[i][0];
-    }
-    printChordOnKeyboard([shuffledPosList[0][printed]]);    // from script keyboard.js
+    voicingSequence = naive(chordCollection, dropChosen); // from script naive.js   //without var : global. depreciated..
+    // shuffledPosList = [];
+    // chordsPosList = [];
+    // (chordsPosList = voicingSequence.slice();)
+    // for (var i = 0; i < voicingSequence.length; i++) {
+    //     shuffledPosList[i] = shuffle(voicingSequence[i]);
+    //     chordsPosList[i] = shuffledPosList[i][0];
+    // }
+    printChordOnKeyboard(voicingSequence[0]);    // from script keyboard.js
 
-    console.log("shuffledPosList: ", shuffledPosList);
-    console.log("chordPosList: ", chordsPosList);
+    // console.log("shuffledPosList: ", shuffledPosList);
+    // console.log("chordPosList: ", chordsPosList);
+    console.log("chordPosList: ", voicingSequence);
 
     cleanSheet();
-    ChordListToSheet(chordCollection, chordsPosList);
+    // ChordListToSheet(chordCollection, chordsPosList);
+    ChordListToSheet(chordCollection, voicingSequence);
     //HERE INSERT THE AFFECTATION OF THE BUTTON TO THE FUNCTION AUDIO//
 };
 
 // NEXT BUTTON (TEMPORARY)
 document.getElementById("nextButton").onclick = function () {
-    if (positionsList) {
-        printed += 1
-        printChordOnKeyboard([shuffledPosList[0][printed]])      // from script keyboard.js
+    if (voicingSequence) {
+        printingIndex += 1
+        printChordOnKeyboard(voicingSequence[printingIndex])      // from script keyboard.js
     }
 };
 

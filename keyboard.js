@@ -15,7 +15,7 @@ function printChordOnKeyboard(chord) {
     
     context.clearRect(0, 240, canvas.width, 10); 
 
-    chord[0].forEach(key => {
+    chord.forEach(key => {
 
         x = keywidth;
         x += Math.floor(key/12)*keywidth*7;
