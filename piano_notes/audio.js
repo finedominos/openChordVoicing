@@ -25,9 +25,10 @@ function play_sheet_formG4(sheet) {
     setTimeout(wait_to_push, (sheet.length - 1) * 3500);
 }
 
+//chordPosList is something like [ [61,88], [13], ... ] 
 //convert the sheet previously printed (input : chordPosList in main.js ) with num_to_note(), and play it with play_sheet_formG4()
 function play_sheet_button() {
-    sheet_formG4 = num_to_note(chordsPosList);
+    sheet_formG4 = num_to_note(voicingSequence);
     play_sheet_formG4(sheet_formG4);
 }
 audio_button.onclick = play_sheet_button;
