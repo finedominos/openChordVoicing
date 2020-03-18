@@ -63,6 +63,10 @@ function chordTypeToTemplate(chord) {
         template[0].push(5);
         template[1].push(chord.fifth == "b5" ? 7 : 9);
     }
+    if (chord.fifth == 5) { //ALIETTE ADDED THIS
+        template[0].push(5); //ALIETTE ADDED THIS
+        template[1].push(8); //ALIETTE ADDED THIS
+    }
     if (chord.thirteenth != "/") {
         template[0].push(6);
         template[1].push(chord.thirteenth == 13 ? 10 : 9);
@@ -132,7 +136,9 @@ function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
 
 //Representing the chord in a way suitable for the music sheet
 function ChordToSheet(chord) {
-    notesChord = [[]];
+    notesChord = [
+        []
+    ];
     //console.log(notesChord);
     for (n in chord) {
         alt = '';
@@ -162,10 +168,10 @@ function ChordListToSheet(chordsList, chordsNotePositionsList) {
 
     for (var i = 0; i < chordsList.length; i++) {
         template = chordTypeToTemplate(chordsList[i]);
-        
+
         builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
         finalChordList.push(ChordToSheet(builtChord));
-        
+
         //console.log("chordTypeTemplate", template);
     }
     createSheet(finalChordList);
