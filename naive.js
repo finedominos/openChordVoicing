@@ -91,9 +91,22 @@ function keepBestVoicing(chordN, allPossibilitiesNextChord){
     console.log("initial number possibilities : "+ allPossibilitiesNextChord.length);
     console.log("number of possibilities after melody filter : "+ allKeptPossibilities.length);
 
-    // NOT FINISHED
+    chordN.sort().reverse();
+    console.log("Chord N sorted : " + chordN);
+    distance = 999;
+    bestCandidate = null;
 
-    return(allKeptPossibilities[0])
+    allKeptPossibilities.forEach(candidate => {
+        candidate.sort().reverse();
+        console.log("Candidate sorted : " + candidate);
+        distanceCandidate = (chordN[0]-candidate[0])*3+(chordN[1]-candidate[1])*2+(chordN[2]-candidate[2])
+        if(distanceCandidate < distance){
+            bestCandidate = candidate;
+            distance = distanceCandidate;
+        }
+    });
+
+    return(bestCandidate)
 }
 
 
@@ -198,7 +211,7 @@ function compute(baseKeyListOctave1) {
     // console.log(baseKeyListOctage3)
     // console.log(baseKeyListOctage4)
 
-    // listCombinationsFirstChord.push(baseKeyListOctave1);     // First octave is too low
+    // listCombinationsChord.push(baseKeyListOctave1);     // First octave is too low
     listCombinationsChord.push(baseKeyListOctage2);
     listCombinationsChord.push(baseKeyListOctage3);
     listCombinationsChord.push(baseKeyListOctage4);
@@ -262,11 +275,12 @@ function reasonnableRange(chord, rangeOneHand = 16, maxRange = 46, maxNote = 61)
     var min = Math.min(...chord);
     var max = Math.max(...chord);
 
-    //Not accessible with just one hand, we wan't to spread a bit :
-    if ((max - min) <= rangeOneHand) {
-        return false;
-        // console.log("one hand : "+chord)
-    }
+    // //Not accessible with just one hand, we wan't to spread a bit :
+    // if ((max - min) <= rangeOneHand) {
+    //     return false;
+    //     // console.log("one hand : "+chord)
+    // }
+    
     if ((max - min) > maxRange) {  //We don't want some extreme spreading
         return false;
         // console.log("too much spread : "+chord)
