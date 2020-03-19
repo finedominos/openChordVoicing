@@ -275,11 +275,11 @@ function reasonnableRange(chord, rangeOneHand = 16, maxRange = 46, maxNote = 61)
     var min = Math.min(...chord);
     var max = Math.max(...chord);
 
-    // //Not accessible with just one hand, we wan't to spread a bit :
-    // if ((max - min) <= rangeOneHand) {
-    //     return false;
-    //     // console.log("one hand : "+chord)
-    // }
+    //Not accessible with just one hand, we wan't to spread a bit :
+    if ((max - min) <= rangeOneHand) {
+        return false;
+        // console.log("one hand : "+chord)
+    }
     
     if ((max - min) > maxRange) {  //We don't want some extreme spreading
         return false;

@@ -230,6 +230,14 @@ document.getElementById("nextButton").onclick = function () {
     }
 };
 
+// PREVIOUS BUTTON (TEMPORARY)
+document.getElementById("previousButton").onclick = function () {
+    if (voicingSequence) {
+        printingIndex -= 1
+        printChordOnKeyboard(voicingSequence[printingIndex])      // from script keyboard.js
+    }
+};
+
 
 
 // Compute the english notation of the chord, such as C#7b9, and print it in the dedicated block (in real time).
