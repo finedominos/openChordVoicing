@@ -47,7 +47,7 @@ const LinearPillbar = {
                     value += element.name;
                 }
             });
-            if(this.type == 'drop'){
+            if (this.type == 'drop') {
                 dropChosen = value;
                 console.log(dropChosen)
             }
@@ -159,10 +159,10 @@ function computeChord() {
     label = '';
     chord = {};
     vueCollection.forEach(element => {
-        if(element.type != 'drop'){
+        if (element.type != 'drop') {
             if (element.print != '/' && element.print != '5' && element.print != 'M')
                 label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
-    
+
             prop = element.type;
             chord = Object.assign(chord, { prop: element.print });
             chord[element.type] = element.print;
@@ -182,8 +182,14 @@ function computeChord() {
 document.getElementById("addButton").onclick = function () {
     chordCollection.push(computeChord())
     var string = "";
+    var first = true;
     chordCollection.forEach(element => {
-        string += element.print + " ; ";
+        if (first) {
+            string += element.print;
+            first = false;
+        } else {
+            string += " | " + element.print;
+        }
     });
     document.getElementById("contentSequencePrinting").innerHTML = string;
 };
@@ -198,7 +204,7 @@ document.getElementById("resetButton").onclick = function () {
 
 // GO BUTTON : here is call the algorithmic part of the project, to compute our voicings.
 document.getElementById("goButton").onclick = function () {
-    if(chordCollection.length==0){
+    if (chordCollection.length == 0) {
         alert('Add at least one chord.');
         return;
     }
@@ -244,8 +250,7 @@ document.getElementById("previousButton").onclick = function () {
 function computeLabel() {
     label = '';
     vueCollection.forEach(element => {
-        if (element.print != '/' && element.print != '5' && element.print != 'M' && element.type != 'drop')
-        {
+        if (element.print != '/' && element.print != '5' && element.print != 'M' && element.type != 'drop') {
             // English notation ignore some elements such as ♮, etc
             label += element.print.replace('♮', '').replace('#5', 'aug').replace('b5', 'dim');
         }
@@ -258,25 +263,3 @@ function computeLabel() {
 setInterval(() => {
     computeLabel()
 }, 300);
-
-
-
-//Temporary needed function
-//// This function is not mine, found at https://github.com/Daplie/knuth-shuffle
-function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}

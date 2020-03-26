@@ -28,6 +28,7 @@ function play_sheet_formG4(sheet) {
 //chordPosList is something like [ [61,88], [13], ... ] 
 //convert the sheet previously printed (input : chordPosList in main.js ) with num_to_note(), and play it with play_sheet_formG4()
 function play_sheet_button() {
+    // TODO : you can't call voicingSequence like that, also because it may not even exist, and is property of main. maybe some functions need to be moved to main ? or some changes in the main dunnow..
     sheet_formG4 = num_to_note(voicingSequence);
     play_sheet_formG4(sheet_formG4);
 }

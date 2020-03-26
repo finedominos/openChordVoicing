@@ -9,12 +9,18 @@
 
 <body>
 
-    <h1>Open Chord Voicing</h1>
 
-    <div id="upDescription" class="principalDiv">
-        <p>Here a bit of text to present the thing</p>
+    <header>
+        <img src="header.jpg">
 
-    </div>
+        <h1>Open Chord Voicing</h1>
+
+        <div id="upDescription" class="principalDiv">
+            <p>Humble app to suggest voicings</p>
+
+        </div>
+
+    </header>
 
     <div id="sequenceOfChordsBuilding" class="principalDiv">
         <div id="chordPicking">
@@ -41,7 +47,7 @@
 
         </div>
 
-        <div>
+        <div id="sequenceCtrl">
             <p id="labelPrinting">chosen chord :</p>
             <div class="button">
                 <button id="addButton">Add</button>
@@ -50,7 +56,7 @@
 
         </div>
         <div id="sequencePrinting">
-            i print the sequence of chords here
+            <p>Sequence : </p>
             <p id="contentSequencePrinting"></p>
         </div>
         <div id="finalButtons">
@@ -132,6 +138,9 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+
+    <!-- TODO : Shouldn't we just call main.js, who will import the rest ? -->
 
     <script src="keyboard.js"></script>
     <script src="naive.js"></script>

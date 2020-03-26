@@ -1,3 +1,6 @@
+// TODO : this file will be deleted in a near futur
+
+
 //drop 2 : the 5th is lowered of one octave
 // drop 3 : the 3rd is lowered of one octave
 // drop 2+4 : the 5th is lowered and the root is lowered of one octave
