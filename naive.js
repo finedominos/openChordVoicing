@@ -99,7 +99,7 @@ function keepBestVoicing(chordN, allPossibilitiesNextChord){
     allKeptPossibilities.forEach(candidate => {
         candidate.sort().reverse();
         console.log("Candidate sorted : " + candidate);
-        distanceCandidate = (chordN[0]-candidate[0])*3+(chordN[1]-candidate[1])*2+(chordN[2]-candidate[2])
+        distanceCandidate = (chordN[0]-candidate[0])*3+(chordN[1]-candidate[1])*2+(chordN[2]-candidate[2]+(chordN[chordN.length-1]-candidate[candidate.length-1])*0.1)
         if(distanceCandidate < distance){
             bestCandidate = candidate;
             distance = distanceCandidate;
