@@ -67,7 +67,7 @@ function naive(chordSequence, dropChosen) {
     // to help better selection of possible chords before computing all distances, a preselection concerning the highest tone of the chord
     // will be performed, as we think a voicing of a chord sequence is nice first of all when the highest tone creates a conjoint melody.
 
-    console.log("************************* big computation part *****************************")
+    console.log("************************* Big computation part (naive) *****************************");
 
     var chordPointed = firstChord;
     chordSequenceFollowingFinalList.forEach(listPossibilitiesNextChord => {
@@ -75,8 +75,9 @@ function naive(chordSequence, dropChosen) {
         finalSequence.push(chordPointed);
     });
 
-    console.log("final sequence : ");
+    console.log("\nfinal sequence : ");
     console.log(finalSequence);
+    console.log("\n******************** End of the big computation part (naive) *************************\n");
     return (finalSequence)
 }
 
@@ -84,29 +85,50 @@ function keepBestVoicing(chordN, allPossibilitiesNextChord){
     // First, no need to keep a possibility if its higher tone is far from the higher one of ChordN. Voicings create melody.
     var allKeptPossibilities = [];
     allPossibilitiesNextChord.forEach(possibility => {
-        if(Math.abs(Math.max(...chordN)-Math.max(...possibility))<=3){
+        if(Math.abs(Math.max(...chordN)-Math.max(...possibility))<=3){  // There will always be a possibility who's max is at maximum 3 semitones from the max of the previous chord (chordN)
             allKeptPossibilities.push(possibility);
         }
     });
+    console.log("\n\n************")
     console.log("initial number possibilities : "+ allPossibilitiesNextChord.length);
     console.log("number of possibilities after melody filter : "+ allKeptPossibilities.length);
 
     chordN.sort().reverse();
     console.log("Chord N sorted : " + chordN);
-    distance = 999;
-    bestCandidate = null;
+
+    chordN_mid_part = chordN.slice(2,chordN.length-1);
+    console.log("mid-low part of Chord N : " + chordN_mid_part);
+
+    // Init of the best candidate
+    var distance = 9999;
+    var bestCandidate = null;
 
     allKeptPossibilities.forEach(candidate => {
         candidate.sort().reverse();
         console.log("Candidate sorted : " + candidate);
-        distanceCandidate = (chordN[0]-candidate[0])*3+(chordN[1]-candidate[1])*2+(chordN[2]-candidate[2]+(chordN[chordN.length-1]-candidate[candidate.length-1])*0.1)
+        distanceCandidate = Math.abs(chordN[0]-candidate[0])*50+Math.abs(chordN[1]-candidate[1])*30+Math.abs(chordN[chordN.length-1]-candidate[candidate.length-1])*10;
+        chordN_mid_part.forEach(note => {
+            distanceCandidate += distanceCorrespondingNote(note, candidate); // 2 successive chords don't have necessarly the same number or notes. Comparing notes of the same rank in the medium wouldn't be logical.
+        });
+
+        console.log("its dist : "+distanceCandidate);
+        console.log("actual best dist : "+distance);
         if(distanceCandidate < distance){
             bestCandidate = candidate;
             distance = distanceCandidate;
         }
     });
-
+    console.log("BEST VOICING : " + bestCandidate );
     return(bestCandidate)
+}
+
+function distanceCorrespondingNote(noteN, chord){    //return the distance between a note and its logical "resolution" in the next chord
+    var distance = 100;
+    chord.forEach(note =>{
+        // console.log(distance);
+        distance = Math.min(distance, Math.abs(note-noteN));
+    });
+    return distance
 }
 
 

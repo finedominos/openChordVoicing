@@ -83,7 +83,7 @@ function chordTypeToTemplate(chord) {
 //For now, used within the find_note function to return all possible chromatic representations of a numeric value
 //Example: for the input of value 11 and the chromatic dictionary, the function will return ['A#', 'Bb']
 function find_val(dictionary, value) {
-    arr = [];
+    var arr = [];
     for (d in dictionary) {
         if (dictionary[d] == value) {
             arr.push(d);
@@ -94,7 +94,7 @@ function find_val(dictionary, value) {
 
 //Finding the chromatic name of note from its numeric representation (is it A# or Bb?)
 function find_note(diatonicNote, chromaticPosition) {
-    arr = find_val(chromaticNoteRepresentation, chromaticPosition); //returns the 
+    var arr = find_val(chromaticNoteRepresentation, chromaticPosition); //returns the 
     for (a in arr) {
         //console.log(dnote, arr[a], arr[a].charAt(0));    
         if (arr[a].charAt(0) == diatonicNote) {
@@ -108,7 +108,7 @@ function find_note(diatonicNote, chromaticPosition) {
 //The structure of a chord template is a 2D array: [diatonicNotePosition][chromaticNotePosition], e.g. for major chord [1,3,5][1,4,8]
 //ChordNotesFullRange: chord notes represented in numbers of the whole considered range (currently from 1 to 85, where 1 stands for C1, while 85 stands for C5)
 function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
-    chord = [];
+    var chord = [];
     for (i = 0; i < chordNotesFullRange.length; i++) {
 
         //Computing the numeric position of the note within one octave
@@ -136,10 +136,10 @@ function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
 
 //Representing the chord in a way suitable for the music sheet
 function ChordToSheet(chord) {
-    notesChord = [
+    var notesChord = [
         []
     ];
-    //console.log(notesChord);
+    console.log("*error searching* : "+chord);
     for (n in chord) {
         alt = '';
         //console.log(chord[n]);
@@ -161,15 +161,15 @@ function ChordToSheet(chord) {
 //Represeting the total array of chords in a way suitable for the music sheet
 //ChordsList is an array of chords as generic objects, while chordsNotePositionsList is an array of numerical representations of specific voicings
 function ChordListToSheet(chordsList, chordsNotePositionsList) {
-    finalChordList = [];
+    var finalChordList = [];
 
     console.log("chordsList: ", chordsList);
     //console.log("chordsNotePositionsList: ", chordsNotePositionsList);
 
     for (var i = 0; i < chordsList.length; i++) {
-        template = chordTypeToTemplate(chordsList[i]);
+        var template = chordTypeToTemplate(chordsList[i]);
 
-        builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
+        var builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
         finalChordList.push(ChordToSheet(builtChord));
 
         //console.log("chordTypeTemplate", template);
