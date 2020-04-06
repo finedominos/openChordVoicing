@@ -47,8 +47,8 @@ function chordTypeToTemplate(chord) {
         [1]
     ];
     if (chord.ninth != "/") {
-        template[1].push(chord.ninth == "♮" ? 2 : (chord.ninth == "b9" ? 1 : 3));
         template[0].push(2);
+        template[1].push(chord.ninth == "♮" ? 3 : (chord.ninth == "b9" ? 2 : 4));
     }
     if (chord.color != "pow") {
         template[0].push(3);
@@ -58,7 +58,6 @@ function chordTypeToTemplate(chord) {
         template[0].push(4);
         template[1].push(chord.eleventh == 11 ? 6 : 7);
     }
-
     if (chord.fifth != 5) {
         template[0].push(5);
         template[1].push(chord.fifth == "b5" ? 7 : 9);
@@ -141,7 +140,7 @@ function ChordToSheet(chord) {
     console.log("*error searching* : "+chord);
     for (n in chord) {
         alt = '';
-        //console.log(chord[n]);
+        console.log(chord[n]);
         switch (chord[n].charAt(1)) {
             case '#':
                 alt = '+1';
@@ -168,6 +167,7 @@ function ChordListToSheet(chordsList, chordsNotePositionsList) {
     for (var i = 0; i < chordsList.length; i++) {
         var template = chordTypeToTemplate(chordsList[i]);
 
+        console.log("error searching 2:", chordsNotePositionsList[i], chordsList[i].root, template);
         var builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
         finalChordList.push(ChordToSheet(builtChord));
 
