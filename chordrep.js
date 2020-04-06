@@ -47,7 +47,7 @@ function chordTypeToTemplate(chord) {
         [1]
     ];
     if (chord.ninth != "/") {
-        template[1].push(chord.ninth == "♮" ? 2 : (chord.ninth == "b" ? 1 : 3));
+        template[1].push(chord.ninth == "♮" ? 2 : (chord.ninth == "b9" ? 1 : 3));
         template[0].push(2);
     }
     if (chord.color != "pow") {
@@ -70,7 +70,6 @@ function chordTypeToTemplate(chord) {
     if (chord.thirteenth != "/") {
         template[0].push(6);
         template[1].push(chord.thirteenth == 13 ? 10 : 9);
-
     }
     if (chord.seventh != "/") {
         template[0].push(7)
