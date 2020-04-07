@@ -5,23 +5,37 @@
 var chromaticNoteRepresentation = {
     'B#': 1,
     'C♮': 1,
+    'Dbb': 1,
+    'B##': 2,
     'C#': 2,
     'Db': 2,
+    'C##': 3,
     'D♮': 3,
+    'Ebb': 3,
     'D#': 4,
     'Eb': 4,
+    'Fbb': 4,
+    'D##': 5,
     'E♮': 5,
     'Fb': 5,
     'E#': 6,
     'F♮': 6,
+    'Gbb': 6,
+    'E##': 7,
     'F#': 7,
     'Gb': 7,
+    'F##': 8,
     'G♮': 8,
+    'Abb': 8,
     'G#': 9,
     'Ab': 9,
+    'G##': 10,
     'A♮': 10,
+    'Bbb': 10,
     'A#': 11,
     'Bb': 11,
+    'Cbb': 11,
+    'A##': 12,
     'B♮': 12,
     'Cb': 12,
 };
@@ -125,6 +139,7 @@ function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
         //Computing the octave in which the note is - TO BE CHANGED IF THE OCTAVES ARE RESTRICTED?
         OctNumber = Math.floor(chordNotesFullRange[i] / 12);
 
+        //console.log(diatonicNoteRepresentation, newDiatonic, newChromatic);
         newNote = find_note(find_val(diatonicNoteRepresentation, newDiatonic), newChromatic);
         newNote += OctNumber;
         chord[i] = newNote;
@@ -140,18 +155,29 @@ function ChordToSheet(chord) {
     console.log("*error searching* : "+chord);
     for (n in chord) {
         alt = '';
-        console.log(chord[n]);
+        //console.log("this is the string of the chord", chord[n]);
         switch (chord[n].charAt(1)) {
             case '#':
-                alt = '+1';
+                if (chord[n].charAt(2)=='#'){
+                    alt = '+2';
+                }
+                else alt = '+1';
                 break;
             case 'b':
-                alt = '-1';
+                if (chord[n].charAt(2)=='b'){
+                    alt = '-2';
+                }
+                else alt = '-1';
                 break;
             default:
                 alt = '0';
         }
-        notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(2)) + 1, alt]
+        if (chord[n].charAt(2)=='#' || chord[n].charAt(2)=='b'){
+            notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(3)) + 1, alt];
+        }
+        else {
+            notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(2)) + 1, alt];
+        }
     }
     return notesChord;
 }
@@ -167,7 +193,7 @@ function ChordListToSheet(chordsList, chordsNotePositionsList) {
     for (var i = 0; i < chordsList.length; i++) {
         var template = chordTypeToTemplate(chordsList[i]);
 
-        console.log("error searching 2:", chordsNotePositionsList[i], chordsList[i].root, template);
+        //console.log("error searching 2:", chordsNotePositionsList[i], chordsList[i].root, template);
         var builtChord = makeChord(chordsNotePositionsList[i], chordsList[i].root, template);
         finalChordList.push(ChordToSheet(builtChord));
 
