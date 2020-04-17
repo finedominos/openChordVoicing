@@ -137,10 +137,18 @@ function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
             }
         }
         //Computing the octave in which the note is - TO BE CHANGED IF THE OCTAVES ARE RESTRICTED?
-        OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12);
+        if(newDiatonic == 7 && (newChromatic == 1 || newChromatic == 2)) {
+            OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12) - 1;
+        }
+        else if(newDiatonic == 1 && (newChromatic == 12 || newChromatic == 11)){
+            OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12) + 1;
+        }
+        else {
+            OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12);
+        }
         //console.log("chordNotesFullRange[i]", chordNotesFullRange[i], "OctNumber", OctNumber);
 
-        //console.log(diatonicNoteRepresentation, newDiatonic, newChromatic);
+        //console.log("newDiatonic, newChromatic", newDiatonic, newChromatic);
         newNote = find_note(find_val(diatonicNoteRepresentation, newDiatonic), newChromatic);
         newNote += OctNumber;
         chord[i] = newNote;
