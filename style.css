@@ -12,6 +12,10 @@
     font-size: 14px;
 }
 
+.resultDivs {
+    visibility: hidden;
+}
+
 
 /* Header */
 
@@ -161,6 +165,7 @@ header #upDescription {
     position: relative;
     overflow: visible;
     height: 180px;
+    top : -3em;
 }
 
 svg {
@@ -195,9 +200,10 @@ svg {
     border-radius: 50%;
     background: rgb(107, 159, 218);
     border: 2px solid rgb(6, 12, 100);
-    position: absolute;
+    /* position: absolute;
     left: 180px;
-    top: 400px;
+    top: 400px; */
+    margin: 1em;
     z-index: 1;
 }
 
@@ -224,4 +230,25 @@ svg {
 #keyboard {
     border-style: solid;
     border-radius: 1em;
+}
+#labelKeyboard{
+    padding-left: 2em;
+}
+
+/*NoResults*/
+
+#noResults{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    width:20em;
+    height:8em;
+    margin-left: -10em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    z-index:-1;
+}
+#noResults p{
+    font-style: italic;
+    text-align: center ;
 }

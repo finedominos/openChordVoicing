@@ -208,15 +208,25 @@ document.getElementById("goButton").onclick = function () {
         alert('Add at least one chord.');
         return;
     }
-    voicingSequence = naive(chordCollection, dropChosen); // from script naive.js   //without var : global. depreciated..
-    // shuffledPosList = [];
-    // chordsPosList = [];
-    // (chordsPosList = voicingSequence.slice();)
-    // for (var i = 0; i < voicingSequence.length; i++) {
-    //     shuffledPosList[i] = shuffle(voicingSequence[i]);
-    //     chordsPosList[i] = shuffledPosList[i][0];
-    // }
+    voicingSequence = naive(chordCollection, dropChosen); // from script naive.js   //WARNING : global variable.
+    
+    var resultDivs = document.getElementsByClassName("resultDivs");
+    Array.prototype.filter.call(resultDivs, function(element){
+        element.style.visibility = "visible"; 
+    });
+    noResults.style.visibility = "hidden"; 
+
+    previousButton.disabled = true;
+    
+    if (chordCollection.length == 1) {
+        nextButton.disabled = true;
+    }else{
+        nextButton.disabled = false;
+    }
+
+
     printChordOnKeyboard(voicingSequence[0]);    // from script keyboard.js
+    labelKeyboard.innerHTML = chordCollection[0]["print"];
 
     // console.log("shuffledPosList: ", shuffledPosList);
     // console.log("chordPosList: ", chordsPosList);
@@ -232,7 +242,13 @@ document.getElementById("goButton").onclick = function () {
 document.getElementById("nextButton").onclick = function () {
     if (voicingSequence) {
         printingIndex += 1
+        labelKeyboard.innerHTML = chordCollection[printingIndex]["print"];
         printChordOnKeyboard(voicingSequence[printingIndex])      // from script keyboard.js
+    }
+    previousButton.disabled = false;
+    
+    if(printingIndex == voicingSequence.length - 1){
+        nextButton.disabled = true;
     }
 };
 
@@ -240,7 +256,12 @@ document.getElementById("nextButton").onclick = function () {
 document.getElementById("previousButton").onclick = function () {
     if (voicingSequence) {
         printingIndex -= 1
+        labelKeyboard.innerHTML = chordCollection[printingIndex]["print"];
         printChordOnKeyboard(voicingSequence[printingIndex])      // from script keyboard.js
+    }
+    nextButton.disabled = false;
+    if(printingIndex == 0){
+        previousButton.disabled = true;
     }
 };
 

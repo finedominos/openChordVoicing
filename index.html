@@ -67,7 +67,7 @@
         </div>
     </div>
 
-    <div id="sheet" class="principalDiv">
+    <div id="sheet" class="principalDiv resultDivs">
         <button id="audio_button" class="can_be_pushed">
             <div id="triangle"></div>
         </button>
@@ -126,29 +126,43 @@
 
     </div>
 
-    <div id="keyboard" class="principalDiv">
+    <div id="keyboard" class="principalDiv resultDivs">
         <div class="button">
+            <button id="audio_button2" class="can_be_pushed">
+                <div id="triangle"></div>
+            </button>
             <button id="previousButton"><- Prev</button>
             <button id="nextButton">Next -></button>
+            <p id="labelKeyboard">0/</p>
         </div>
         <canvas id="canvasKeyboard" width="1500" height="250">
             <!-- <img src="pianoKeyboard88keys.png" alt="pianoKeyboard88keys"> -->
         </canvas>
     </div>
 
+    <div id="noResults">
+        <p>
+            No result to show currently
+        </p>
+        
+        <p>
+            Try and add some chords
+        </p>
+        
+        <p>
+            Then press GO
+        </p>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 
-    <!-- TODO : Shouldn't we just call main.js, who will import the rest ? -->
-
-    <script src="keyboard.js"></script>
-    <script src="naive.js"></script>
     <script src="main.js"></script>
+    <script src="naive.js"></script>
     <script src="chordrep.js"></script>
     <script src="sheet.js"></script>
-    <script src="drop.js"></script>
+    <script src="keyboard.js"></script>
     <script src="piano_notes/audio.js"></script>
 
 </body>
