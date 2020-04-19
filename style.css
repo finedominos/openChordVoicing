@@ -207,8 +207,6 @@ svg {
     z-index: 10;
 }
 
-.audio_button {}
-
 #triangle {
     border-left: 10px solid rgb(19, 3, 109);
     border-top: 9px solid transparent;
