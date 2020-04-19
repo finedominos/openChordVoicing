@@ -46,7 +46,7 @@ function play_keyboard() {
     wait_to_push(audio_button1, 0);
     wait_to_push(audio_button2, 0);
     play_chord(keyb_formG4[0]);
-    setTimeout(wait_to_push, 3500, audio_button2, 1);
+    setTimeout(wait_to_push, 3500, audio_button1, 1);
     setTimeout(wait_to_push, 3500, audio_button2, 1);
 }
 
