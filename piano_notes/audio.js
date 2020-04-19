@@ -7,22 +7,30 @@ function play_chord(chord) {
         chord[i].play();
     }
 }
+
 //the button must not be pushed again during the playing, so we change the cursor (see style.css)
-function wait_to_push() {
-    audio_button.classList.remove("can_not_be_pushed");
-    audio_button.classList.add("can_be_pushed");
+function wait_to_push(ab, can) {
+    if (can == 1) {
+        ab.classList.remove("can_not_be_pushed");
+        ab.classList.add("can_be_pushed");
+    }
+    if (can == 0) {
+        ab.classList.remove("can_be_pushed");
+        ab.classList.add("can_not_be_pushed");
+    }
 }
 
 //play a given a sheet in format [[G4,B4], [G4,E3]..], with chords every 3.5 sec
 function play_sheet_formG4(sheet) {
-    audio_button.classList.remove("can_be_pushed");
-    audio_button.classList.add("can_not_be_pushed");
+    wait_to_push(audio_button1, 0);
+    wait_to_push(audio_button2, 0);
     for (var chord_numero in sheet) {
         chord = sheet[chord_numero];
         console.log(chord);
         setTimeout(play_chord, chord_numero * 3500, chord);
     }
-    setTimeout(wait_to_push, (sheet.length) * 3500);
+    setTimeout(wait_to_push, (sheet.length) * 3500, audio_button1, 1);
+    setTimeout(wait_to_push, (sheet.length) * 3500, audio_button2, 1);
 }
 
 //chordPosList is something like [ [61,88], [13], ... ] 
@@ -32,8 +40,18 @@ function play_sheet_button() {
     sheet_formG4 = num_to_note(voicingSequence);
     play_sheet_formG4(sheet_formG4);
 }
-audio_button.onclick = play_sheet_button;
 
+function play_keyboard() {
+    keyb_formG4 = num_to_note([lastChordPrinted]);
+    wait_to_push(audio_button1, 0);
+    wait_to_push(audio_button2, 0);
+    play_chord(keyb_formG4[0]);
+    setTimeout(wait_to_push, 3500, audio_button2, 1);
+    setTimeout(wait_to_push, 3500, audio_button2, 1);
+}
+
+audio_button1.onclick = play_sheet_button;
+audio_button2.onclick = play_keyboard;
 //***************************BANK OF NOTES - 3 seconds each**************************//
 
 const path_notes = 'piano_notes/mp3/';
