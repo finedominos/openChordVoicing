@@ -214,7 +214,7 @@ svg {
 }
 
 .can_not_be_pushed {
-    cursor: wait;
+    pointer-events: none;
 }
 
 

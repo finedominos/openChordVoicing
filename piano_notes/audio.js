@@ -26,8 +26,7 @@ function wait_to_push(can) {
 
 //takes a sheet in format [[G4,B4], [G4,E3]..], and play chords every 3.5 sec
 function play_sheet_formG4(sheet) {
-    wait_to_push(audio_button1, 0);
-    wait_to_push(audio_button2, 0);
+    wait_to_push(0);
     for (var chord_numero in sheet) {
         chord = sheet[chord_numero];
         setTimeout(play_chord, chord_numero * 3500, chord);
@@ -46,8 +45,7 @@ function play_sheet_button() {
 function play_keyboard_button() {
     keyb_formG4 = num_to_note([lastChordPrinted]);
     console.log("Playing the chord shown on keyboard... ")
-    wait_to_push(audio_button1, 0);
-    wait_to_push(audio_button2, 0);
+    wait_to_push(0);
     play_chord(keyb_formG4[0]);
     setTimeout(wait_to_push, 3500, 1);
 }
