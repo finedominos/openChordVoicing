@@ -85,6 +85,8 @@ function naive(chordSequence, dropChosen) {
 }
 
 function keepBestVoicing(chordN, allPossibilitiesNextChord){
+    console.log("\n************ (one chord)")
+    console.log("initial number possibilities : "+ allPossibilitiesNextChord.length);
     // First, no need to keep a possibility if its higher tone is far from the higher one of ChordN. Voicings create melody.
     var allKeptPossibilities = [];
     allPossibilitiesNextChord.forEach(possibility => {
@@ -92,8 +94,14 @@ function keepBestVoicing(chordN, allPossibilitiesNextChord){
             allKeptPossibilities.push(possibility);
         }
     });
-    console.log("\n************ (one chord)")
-    console.log("initial number possibilities : "+ allPossibilitiesNextChord.length);
+    if(allKeptPossibilities.length==0){
+        console.log("nothing very close");
+        allPossibilitiesNextChord.forEach(possibility => {
+            if(Math.abs(Math.max(...chordN)-Math.max(...possibility))<=6){  // There will always be a possibility who's max is at maximum 3 semitones from the max of the previous chord (chordN)
+                allKeptPossibilities.push(possibility);
+            }
+        });
+    }
     console.log("number of possibilities after melody filter(focusing only on the highest note of the chord) : "+ allKeptPossibilities.length);
 
     chordN.sort().reverse();

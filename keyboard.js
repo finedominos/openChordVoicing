@@ -11,7 +11,7 @@ img.onload = function () {
 window.onresize = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     canvas.width = 0.782 * window.innerWidth;
-    console.log("canva's new width : "+canvas.width);
+    // console.log("canva's new width : "+canvas.width);
     context.drawImage(img, 0, 0, canvas.width, 240);
     if(this.lastChordPrinted != null){
         printChordOnKeyboard(lastChordPrinted) 
