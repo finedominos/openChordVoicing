@@ -195,12 +195,9 @@ svg {
 }
 
 #audio_button1 {
-    border-radius: 50%;
     position: relative;
-    /*left: 180px;
-    top: 400px; */
     margin: 1em;
-    z-index: 10;
+    z-index: 2;
     border-radius: 6px;
     font-size: 14px;
     padding: 2px 12px;

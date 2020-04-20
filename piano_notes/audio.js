@@ -1,5 +1,4 @@
 //***********************************AUDIO FUNCTION*****************************************//
-// TO DO : adapt the function num_to_note() so it gives the right note
 
 //play all notes of a chord at the same time
 function play_chord(chord) {
@@ -7,51 +6,54 @@ function play_chord(chord) {
         chord[i].play();
     }
 }
-
-//the button must not be pushed again during the playing, so we change the cursor (see style.css)
-function wait_to_push(ab, can) {
+const ab = [audio_button1, audio_button2];
+//the button must not be pushed again during the playing, so cursor is changed to "waiter"
+function wait_to_push(can) {
     if (can == 1) {
-        ab.classList.remove("can_not_be_pushed");
-        ab.classList.add("can_be_pushed");
+        for (var i in ab) {
+            ab[i].classList.remove("can_not_be_pushed");
+            ab[i].classList.add("can_be_pushed");
+        }
+        console.log("...finished playing.")
     }
     if (can == 0) {
-        ab.classList.remove("can_be_pushed");
-        ab.classList.add("can_not_be_pushed");
+        for (var i in ab) {
+            ab[i].classList.remove("can_be_pushed");
+            ab[i].classList.add("can_not_be_pushed");
+        }
     }
 }
 
-//play a given a sheet in format [[G4,B4], [G4,E3]..], with chords every 3.5 sec
+//takes a sheet in format [[G4,B4], [G4,E3]..], and play chords every 3.5 sec
 function play_sheet_formG4(sheet) {
     wait_to_push(audio_button1, 0);
     wait_to_push(audio_button2, 0);
     for (var chord_numero in sheet) {
         chord = sheet[chord_numero];
-        console.log(chord);
         setTimeout(play_chord, chord_numero * 3500, chord);
     }
-    setTimeout(wait_to_push, (sheet.length) * 3500, audio_button1, 1);
-    setTimeout(wait_to_push, (sheet.length) * 3500, audio_button2, 1);
+    setTimeout(wait_to_push, (sheet.length) * 3500, 1);
 }
 
-//chordPosList is something like [ [61,88], [13], ... ] 
-//convert the sheet previously printed (input : chordPosList in main.js ) with num_to_note(), and play it with play_sheet_formG4()
+//plays the sequence of chords printed on the sheet
 function play_sheet_button() {
-    // TODO : you can't call voicingSequence like that, also because it may not even exist, and is property of main. maybe some functions need to be moved to main ? or some changes in the main dunnow..
+    console.log("Playing the sheet music... ")
     sheet_formG4 = num_to_note(voicingSequence);
     play_sheet_formG4(sheet_formG4);
 }
 
-function play_keyboard() {
+//plays the chord printed on the keyboard
+function play_keyboard_button() {
     keyb_formG4 = num_to_note([lastChordPrinted]);
+    console.log("Playing the chord shown on keyboard... ")
     wait_to_push(audio_button1, 0);
     wait_to_push(audio_button2, 0);
     play_chord(keyb_formG4[0]);
-    setTimeout(wait_to_push, 3500, audio_button1, 1);
-    setTimeout(wait_to_push, 3500, audio_button2, 1);
+    setTimeout(wait_to_push, 3500, 1);
 }
 
 audio_button1.onclick = play_sheet_button;
-audio_button2.onclick = play_keyboard;
+audio_button2.onclick = play_keyboard_button;
 //***************************BANK OF NOTES - 3 seconds each**************************//
 
 const path_notes = 'piano_notes/mp3/';
@@ -111,10 +113,10 @@ const B5 = new Audio(path_notes + 'Piano.ff.B5r.mp3');
 
 const C6 = new Audio(path_notes + 'Piano.ff.C6r.mp3');
 
-//scale 2,3,4,5 with C6, 5 with C6, 5 with C6 (goes from note 13 to 61, and scale 5 is added 3 times temporary)
+//scale 2,3,4,5 with C6, (goes from note 13 to 61)
 const note_list_G4_to_61 = [C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, C3,  Db3,  D3,  Eb3,  E3,  F3,  Gb3,  G3,  Ab3,  A3,  Bb3,  B3, C4,  Db4,  D4,  Eb4,  E4,  F4,  Gb4,  G4,  Ab4,  A4,  Bb4,  B4, C5,  Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6, Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6, Db5,  D5,  Eb5,  E5,  F5,  Gb5,  G5,  Ab5,  A5,  Bb5,  B5, C6 ];
 
-//Converting chordsPosList = [ [61,88], [13] ] into [ [E4,G4], [C2] ]
+//converts numeros of notes into names (ex : 61 into G4) 
 function num_to_note(num) {
     var new_vec = [];
     for (var ch in num) {

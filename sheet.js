@@ -1,13 +1,9 @@
 //***********************************SHEET FUNCTION*****************************************//
-/*createSheet(chord_list) printed the notes on the sheet. 
-It has to call chord_list = output of chordAliette in chordrep.js*/
-
+//createSheet(chord_list) prints the sheet//
 //cleanSheet() clean the sheet//
 
-//note representation : [0,4,+1] is a C, of octave 4, with a sharp
+//note representation : n = [0,4,+1] is a C, of octave 4, with a sharp
 //sheet = [chord1, chord2] = [ [[0,4,1],[2,4,0]] , [[0,5,1],[3,4,0]] ] for example
-
-//TO COMPLETE (bars) FOR 4 OCTAVE, from C2 TO C6
 
 const svgNS = 'http://www.w3.org/2000/svg'
 const xlinkNS = 'http://www.w3.org/1999/xlink'
@@ -23,7 +19,7 @@ ctrl.value = notes
 
 const notesElem = document.getElementById('notes')
 
-//create, for a note n in position i, the graphic element corresponding to id: id can be sharp, bar..//
+//create the graphic element corresponding to "id" for a note n in position i (on x_axis) //
 function createElementofNote(n, i, id) {
     const note = document.createElementNS(svgNS, 'use')
     let anchor
@@ -34,10 +30,10 @@ function createElementofNote(n, i, id) {
     notesElem.appendChild(note)
 }
 
-//notes where other bars are needed (04 is C of octave 4)
-const bar_m_needed = ['04', '55', '22', '06', '02'] //C4, A5, E2, C6, C2
+//notes for which horizontal bars are needed : C4, A5, E2, C6, C2
+const bar_m_needed = ['04', '55', '22', '06', '02']
 
-//prints the note n = [0,4,+1] for ex, at position i, with a shift for adjacents notes
+//print the note n at position i, with a shift for adjacents notes
 function createNote(n, i, shift) {
     let j
     j = i
@@ -59,7 +55,7 @@ function createNote(n, i, shift) {
     if (a == '12' || a == '02') { createElementofNote([2, 2, 0], j, '#bar_mid') }
 }
 
-//prints the chord in position i
+//print the chord in position i
 function createChord(chord, i) {
     for (var k = 0; k < chord.length; k++) {
         if (k > 0) {
@@ -71,9 +67,14 @@ function createChord(chord, i) {
 }
 //print the sheet
 function createSheet(chord_list) {
+    console.log("******************** SHEET *********************")
+    console.log("printing sheet : ")
     for (var i = 0; i < chord_list.length; i++) {
         createChord(chord_list[i], i)
     }
+    console.log(chord_list[0])
+    console.log("**************** end of sheet printing *****************")
+
 }
 
 function cleanSheet() {
@@ -81,4 +82,5 @@ function cleanSheet() {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
+    console.log("Sheet clean")
 }

@@ -76,9 +76,9 @@ function chordTypeToTemplate(chord) {
         template[0].push(5);
         template[1].push(chord.fifth == "b5" ? 7 : 9);
     }
-    if (chord.fifth == 5) { //ALIETTE ADDED THIS
-        template[0].push(5); //ALIETTE ADDED THIS
-        template[1].push(8); //ALIETTE ADDED THIS
+    if (chord.fifth == 5) {
+        template[0].push(5);
+        template[1].push(8);
     }
     if (chord.thirteenth != "/") {
         template[0].push(6);
@@ -137,13 +137,11 @@ function makeChord(chordNotesFullRange, chordRoot, chordTypeTemplate) {
             }
         }
         //Computing the octave in which the note is - TO BE CHANGED IF THE OCTAVES ARE RESTRICTED?
-        if(newDiatonic == 7 && (newChromatic == 1 || newChromatic == 2)) {
+        if (newDiatonic == 7 && (newChromatic == 1 || newChromatic == 2)) {
             OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12) - 1;
-        }
-        else if(newDiatonic == 1 && (newChromatic == 12 || newChromatic == 11)){
+        } else if (newDiatonic == 1 && (newChromatic == 12 || newChromatic == 11)) {
             OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12) + 1;
-        }
-        else {
+        } else {
             OctNumber = Math.floor((chordNotesFullRange[i] - 1) / 12);
         }
         //console.log("chordNotesFullRange[i]", chordNotesFullRange[i], "OctNumber", OctNumber);
@@ -166,24 +164,21 @@ function ChordToSheet(chord) {
         //console.log("this is the string of the chord", chord[n]);
         switch (chord[n].charAt(1)) {
             case '#':
-                if (chord[n].charAt(2)=='#'){
+                if (chord[n].charAt(2) == '#') {
                     alt = '+2';
-                }
-                else alt = '+1';
+                } else alt = '+1';
                 break;
             case 'b':
-                if (chord[n].charAt(2)=='b'){
+                if (chord[n].charAt(2) == 'b') {
                     alt = '-2';
-                }
-                else alt = '-1';
+                } else alt = '-1';
                 break;
             default:
                 alt = '0';
         }
-        if (chord[n].charAt(2)=='#' || chord[n].charAt(2)=='b'){
+        if (chord[n].charAt(2) == '#' || chord[n].charAt(2) == 'b') {
             notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(3)) + 1, alt];
-        }
-        else {
+        } else {
             notesChord[n] = [diatonicNoteRepresentation[chord[n].charAt(0)] - 1, parseInt(chord[n].charAt(2)) + 1, alt];
         }
     }
