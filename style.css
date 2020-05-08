@@ -121,7 +121,7 @@ header #upDescription {
 }
 
 .disabled {
-    color:rgb(182, 182, 182);
+    color: rgb(182, 182, 182);
 }
 
 #sequenceCtrl {
@@ -208,10 +208,20 @@ svg {
     padding: 2px 12px;
 }
 
+#audio_button2 {
+    margin-right: 20px;
+}
+
+#audio_button_descrition {
+    margin-left: 5px;
+    display: inline-block;
+}
+
 #triangle {
     border-left: 10px solid rgb(19, 3, 109);
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
+    display: inline-block;
 }
 
 .can_be_pushed {
