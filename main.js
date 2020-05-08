@@ -200,7 +200,7 @@ function computeChord() {
         }
 
     });
-    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
+    document.getElementById("labelPrinting").innerHTML = "Chosen chord: " + label;
     delete chord.prop;
     chord["print"] = label;
     console.log(chord);
@@ -308,7 +308,7 @@ function computeLabel() {
         }
 
     });
-    document.getElementById("labelPrinting").innerHTML = "chosen chord : " + label;
+    document.getElementById("labelPrinting").innerHTML = "Chosen chord: " + label;
 }
 
 // Updating the block every 300ms
