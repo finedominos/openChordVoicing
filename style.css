@@ -70,6 +70,7 @@ header #upDescription {
 :root {
     --selected-color: #106cc8;
     --active-color: #1e86ed;
+    --disabled-color: rgb(179, 179, 179);
 }
 
 .description {
@@ -117,6 +118,10 @@ header #upDescription {
 .selected {
     background: var(--selected-color);
     color: white;
+}
+
+.disabled {
+    color:rgb(182, 182, 182);
 }
 
 #sequenceCtrl {
