@@ -15,7 +15,7 @@ const LinearPillbar = {
     el: ".row",
     template: `
       <div class="linear-pillbar">
-        <button class="option" v-for="option of options" :class="{selected:option.selected, equal: equalWidth}" @click="select(option)">
+        <button class="option" v-for="option of options" :disabled="option.disabled" :class="{selected:option.selected, disabled:option.disabled, equal: equalWidth}" @click="select(option)">
           <i class="material-icons" v-if="option.icon">{{option.icon}}</i>
           <div v-else>{{option.name}}</div>
         </button>
@@ -69,11 +69,42 @@ const LinearPillbar = {
             } else if (!option.group) {
                 Vue.set(option, 'selected', !option.selected);
             }
+            //ANDRIANA TRYING TO DISABLE OPTIONS :O
+            for (let otherOption of this.options) {
+                    if (otherOption.name == 'b'){
+                        if(option.name=='C' || option.name == 'F'){
+                            Vue.set(otherOption, 'disabled', true);
+                            console.log("b is disabled");
+                        }
+                        else Vue.set(otherOption, 'disabled', false);
+                    }
+                    if (otherOption.name == '#'){
+                        if(option.name=='B' || option.name == 'E'){
+                            Vue.set(otherOption, 'disabled', true);
+                            console.log("# is disabled");
+                        }
+                        else Vue.set(otherOption, 'disabled', false);
+                    }
+                    if (otherOption.name == 'C' || otherOption.name == 'F'){
+                        if(option.name=='b'){
+                            Vue.set(otherOption, 'disabled', true);
+                            console.log("C and F are disabled");
+                        }
+                        else Vue.set(otherOption, 'disabled', false);
+                    }
+                    if (otherOption.name == 'B' || otherOption.name == 'E'){
+                        if(option.name=='#'){
+                            Vue.set(otherOption, 'disabled', true);
+                            console.log("B and E are disabled");
+                        }
+                        else Vue.set(otherOption, 'disabled', false);
+                    }
+            }
         },
     },
     propsData: {
         options: [
-            { name: 'C', group: 'root', selected: true },
+            { name: 'C', group: 'root', selected: true, disabled: false },
             { name: 'D', group: 'root' },
             { name: 'E', group: 'root' },
             { name: 'F', group: 'root' },
@@ -81,8 +112,8 @@ const LinearPillbar = {
             { name: 'A', group: 'root' },
             { name: 'B', group: 'root' },
             { name: '♮', group: 'alt', selected: true },
-            { name: '#', group: 'alt' },
-            { name: 'b', group: 'alt' },
+            { name: '#', group: 'alt', disabled: false },
+            { name: 'b', group: 'alt', disabled: true },
         ],
         equalWidth: true,
     }
