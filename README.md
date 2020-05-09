@@ -20,6 +20,6 @@ picture_to_put_here : ![Screenshot](screenshots/mainWindow.png)
 
 
 ## Authors
-Clément Jamean
+Clément Jameau
 Aliette Ravillion
 Andriana Takic
