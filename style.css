@@ -125,7 +125,25 @@ header #upDescription {
 }
 
 #sequenceCtrl {
-    padding-top: 40px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+#chosenChord{
+    margin:0.5em;
+}
+
+#labelPrinting{
+    font-size: 1.1em;
+    font-weight: bold;
+    margin:0.1em;
+}
+
+#chordCtrl{
+    padding:0.2em;
+    border-style: solid;
+    border-radius: 0.5em;
+    border-width: 0.15em;
 }
 
 #sequencePrinting {
