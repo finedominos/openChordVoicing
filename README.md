@@ -3,7 +3,7 @@
 #### An application for voicing suggestions
 
 ## Introduction
-This application is the result of a joint project for our courses Advanced Coding Tools and Methodologies and Computer Music Representation and Models. Our initial motivation was to help piano beginners to add interesting voicings to their chords. Sometimes, a musician doesn't have access to a sheet, but only to the sequence of the chords' names. He might ghen want to look for voicings ideas, or simply for a way to play correctly chords he doesn't know yet. Open Chord Voicing has been designed to build a voicing suggestion for any sequence of chords, and to provide the sheet, the associated audio and the piano keys to be played. 
+This application is the result of a joint project for our courses Advanced Coding Tools and Methodologies and Computer Music Representation and Models. Our initial motivation was to help piano beginners to add interesting voicings to their chords. Sometimes, a musician doesn't have access to a sheet, but only to the sequence of the chords' names. He might then want to look for voicings ideas, or simply for a way to play correctly chords he doesn't know yet. Open Chord Voicing has been designed to provide voicing suggestions for any sequence of chords, under the form of a sheet, an audio content and a mapping of the piano keys to press.
 
 ![Screenshot](Capture_page.PNG)
 > page of the application after the user selected a chord sequence 
@@ -59,6 +59,6 @@ Bank of piano notes in the mp3 format, from octave n°2 to octave n°5.
 
 
 ## Authors
-Clément Jameau
-Aliette Ravillion
-Andriana Takic
+Clément Jameau  
+Aliette Ravillion  
+Andriana Takic  
