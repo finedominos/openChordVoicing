@@ -3,10 +3,10 @@
 #### An application for voicing suggestions
 
 ## Introduction
-This application is the result of a joint project for our courses Advanced Coding Tools and Methodologies and Computer Music Representation and Models. Our initial motivation was to help piano beginners to add interesting voicings to their chords. Sometimes, a musician doesn't have access to a sheet, but only to the sequence of the chords' names. He might then want to look for voicings ideas, or simply for a way to play correctly chords he doesn't know yet. Open Chord Voicing has been designed to provide voicing suggestions for any sequence of chords, under the form of a sheet, an audio content and a mapping of the piano keys to press.
+This application is the result of a joint project for two courses : Advanced Coding Tools & Methodologies and Computer Music Representation & Models. Our initial motivation was to help piano beginners to add voicings to their chords, since a musician doesn't always have access to a sheet. Sometime, the musician has only access to a sequence of the chords' names, and he might want to look for voicings ideas, or simply for a correct way to play chords he doesn't know yet. Open Chord Voicing has been designed to provide voicing suggestions for any sequence of chords, under the form of a sheet, an audio content and a mapping of the piano keys to be pressed.
 
-![Screenshot](Capture_page.PNG)
-> page of the application after the user selected a chord sequence 
+![Screenshot](input_page.PNG)
+> welcome page of the application
 
 ## User interface
 The user interface is a simple html page divided into 3 parts. 
