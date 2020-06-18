@@ -34,25 +34,25 @@ The user can have an auditive preview of the voicing by clicking on a play butto
 
 ## Files
 
-- **index.html** 
+- **index.html**   
 Provides the structure of the user interface.
 
-- **style.css** 
+- **style.css**   
 Describe the style parameters of the html elements.
 
-- **main.js** 
+- **main.js**   
 Contains the main algorithm of the application, calling every other javascript files.
 
-- **chordrep.js** 
+- **chordrep.js**   
 Deals with the chords representation and with music notation. Converts the user input into objects that can be more easily manipulated at the later stage.
 
-- **naive.js** 
-Compute the voicing suggestion. The first chord has the voicing selected in the first block by the user. The voicing of the following chord follows some rules implemented in naive.js, such as the optimization of the finger's displacement or the spread of notes in low and high octaves.
+- **naive.js**   
+Compute the voicing suggestion with a deterministic algorithm. The first chord has the voicing selected in the first block by the user. The voicing of the following chord follows some rules implemented in naive.js, such as the optimization of the finger's displacement or the spread of notes in low and high octaves.
 
-- **sheet.js** 
+- **sheet.js**   
 Builds the sheet corresponding to the computed voicing, and prints it in the 2nd block.
 
-- **keyboard.js** 
+- **keyboard.js**  
 Prints the keyboard and displays in red what keys should be pressed for each chord.
 
 - **audio.js**  
