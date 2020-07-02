@@ -41,7 +41,7 @@ Provides the structure of the document.
 Style sheet linked to the document.
 
 - **main.js**  
-Main script of the app that manages all the other modules.
+Main script of the application that manages all the other modules.
 
 - **chordrep.js**   
 Module that deals with the chords representation and with music notation. Converts the user input into objects that can be more easily manipulated at the next stage.
@@ -56,7 +56,7 @@ Module that builds the sheet corresponding to the computed voicing, and prints i
 Module that prints the keyboard and displays in red what keys should be pressed for each chord.
 
 - **audio.js**  
-Module that plays an audio associated with the sheet. For each chord, audio.js fetches the needed notes into a bank of mp3 piano notes, and play them at the same time.
+Module that plays the audio associated with the sheet. For each chord, audio.js fetches the needed notes into a bank of mp3 piano notes, and play them at the same time.
 
 - **mp3**  
 Bank of piano notes in the mp3 format, from octave n°2 to octave n°5. 
