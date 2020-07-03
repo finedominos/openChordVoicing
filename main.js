@@ -222,6 +222,31 @@ document.getElementById("addButton").onclick = function () {
         }
     });
     document.getElementById("contentSequencePrinting").innerHTML = string;
+    if(chordCollection.length>=16){
+        document.getElementById("addButton").disabled = true;
+        document.getElementById("addButton").innerHTML = "Max number of <br>chords reached";
+    }
+
+};
+
+//UNDO BUTTON
+document.getElementById("undoButton").onclick = function () {
+    chordCollection.pop()
+    var string = "";
+    var first = true;
+    chordCollection.forEach(element => {
+        if (first) {
+            string += element.print;
+            first = false;
+        } else {
+            string += " | " + element.print;
+        }
+    });
+    document.getElementById("contentSequencePrinting").innerHTML = string;
+    if(document.getElementById("addButton").disabled){
+        document.getElementById("addButton").disabled = false;
+        document.getElementById("addButton").innerHTML = "Add to the <br> sequence";
+    }
 };
 
 //RESET BUTTON
@@ -230,6 +255,10 @@ document.getElementById("resetButton").onclick = function () {
     chordCollection = []
     printingIndex = 0;
     document.getElementById("contentSequencePrinting").innerHTML = '';
+    if(document.getElementById("addButton").disabled){
+        document.getElementById("addButton").disabled = false;
+        document.getElementById("addButton").innerHTML = "Add to the <br> sequence";
+    }
 };
 
 // GO BUTTON : here is call the algorithmic part of the project, to compute our voicings.
