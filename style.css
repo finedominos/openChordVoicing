@@ -71,12 +71,13 @@ header h1 {
     top: 30px;
     left: 50%;
     transform: translate(-50%, -50%);
+    /*color: var(--yellow-color);*/
 }
 
 header #upDescription {
     position: absolute;
-    top: 100px;
-    left: 50%;
+    top: 95px;
+    left: 40%;
     transform: translate(-50%, -50%);
     font-style: italic;
 }
@@ -335,9 +336,9 @@ svg {
 #noResults {
     position: absolute;
     top: 60%;
-    left: 50%;
-    width: 20em;
-    height: 8em;
+    left: 40%;
+    width: 35em;
+    height: 25em;
     margin-left: -10em;
     /*set to a negative number 1/2 of your width*/
     border: 1px solid #ccc;
