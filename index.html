@@ -11,34 +11,39 @@
 
 
     <header>
-        <img src="header.jpg">
+        <h1>OPEN CHORD VOICING</h1>
+        <div id="leftHeader" style="width:20%; float:left; height:150px">
+            <img src="head_notes.png" style="float:left" height=150px>
+        </div>
 
-        <h1>Open Chord Voicing</h1>
-
-        <div id="upDescription" class="principalDiv">
+        <div id="upDescription" class="principalDiv" style="width:50%">
             <p>Humble app to suggest voicings</p>
 
+        </div>
+        <div id="rightHeader" style="width:20%; float:right; height:150px">
+            <img src="head_keyboard.png" style="float:right" height=150px>
+    
         </div>
 
     </header>
 
     <div id="sequenceOfChordsBuilding" class="principalDiv">
         <div id="chordPicking">
-            <div style="margin:10px;width: 300px;" class="container">
-                <p class="description">Choose the root of your chord:</p>
+            <div style="margin:10px;width: 260px;" class="container">
+                <p class="description">Chord root:</p>
                 <div class="row"></div>
             </div>
 
             <div class="subContainer">
-                <div style="margin:10px;width: 188px;" class="container">
-                    <p class="description">Choose the color of your chord:</p>
+                <div style="margin:10px;width: 130px;" class="container">
+                    <p class="description">Chord color:</p>
                     <div class="row"></div>
                     <div class="row"></div>
                     <div class="row"></div>
                 </div>
 
-                <div style="margin:10px;width: 120px;" class="container">
-                    <p class="description">Choose the tension:</p>
+                <div style="margin:10px;width: 110px;" class="container">
+                    <p class="description">Chord tension:</p>
                     <div class="row"></div>
                     <div class="row"></div>
                     <div class="row"></div>
@@ -48,22 +53,30 @@
         </div>
 
         <div id="sequenceCtrl">
-            <p id="chosenChord">Your chord</p>
+            <p id="chosenChord" class="description">Chosen chord:</p>
             <div id="chordCtrl">
                 <p id="labelPrinting"></p>
                 <div class="button">
-                    <button id="addButton">Add</button>
-                    <button id="resetButton">Reset</button>
+                    <button id="addButton">Add to the <br> sequence</button>
                     
                 </div>
             </div>
+        </div>
 
-        </div>
+        <div class="vertLine"></div>
+
         <div id="sequencePrinting">
-            <p>Sequence: </p>
-            <p id="contentSequencePrinting"></p>
+            <p class="description">Generated chord sequence: </p>
+            <div id="sequenceList">
+                <p id="contentSequencePrinting"></p>
+                <div class="button">
+                    <button id="resetButton">Reset</button>
+                </div>
+            </div>      
         </div>
+
         <div id="finalButtons">
+            <p class="description">Voicing: </p>
             <div class="row"></div>
             <div class="button">
                 <button id="goButton">GO</button>
@@ -72,10 +85,12 @@
     </div>
 
     <div id="sheet" class="principalDiv resultDivs">
-        <button id="audio_button1" class="can_be_pushed">
-            <div id="triangle"></div>
-            <span id = "audio_button_descrition"> Play sequence</span>
-        </button>
+        <div class="button">
+            <button id="audio_button1" class="can_be_pushed">
+                <div id="triangle"></div>
+                <span id = "audio_button_descrition"> Play the whole sequence</span>
+            </button>
+        </div>
         <div class="svg">
             <svg>
                 <title>Sheet music</title>
@@ -134,11 +149,12 @@
     <div id="keyboard" class="principalDiv resultDivs">
         <div class="button">
             <button id="audio_button2" class="can_be_pushed">
-                <div id="triangle"></div> <span id = "audio_button_descrition"> Play chord</span>
+                <div id="triangle"></div> <span id = "audio_button_descrition"> Play the current chord</span>
             </button>
+            <p id="labelKeyboard">0/</p>
             <button id="previousButton">← Previous</button>
             <button id="nextButton">Next →</button>
-            <p id="labelKeyboard">0/</p>
+
         </div>
         <canvas id="canvasKeyboard" width="1500" height="250">
             <!-- <img src="pianoKeyboard88keys.png" alt="pianoKeyboard88keys"> -->

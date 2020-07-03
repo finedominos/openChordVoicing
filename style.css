@@ -1,5 +1,27 @@
 /* STYLE */
 
+/* COLORS */
+:root{
+    /*--main-bg-color: rgb(255,161,35);*/
+    /*--main-bg-color: #57b252;*/
+    --main-bg-color:  rgb(255,181,45);
+    --button-color:  #012437;
+    --button-text-color: white;
+    --border-color: rgb(18,18,18);
+    /*--yellow-color: #f3af05;*/
+    --yellow-color: rgb(255,181,45);
+}
+
+@font-face {
+    font-family: textFont;
+    src: url("Lato-Regular.ttf");
+}
+
+body{
+    background-color:var(--main-bg-color);
+    font-family:textFont;
+}
+
 .principalDiv {
     margin-left: 10%;
     margin-right: 10%;
@@ -8,12 +30,23 @@
 
 .button button {
     border-radius: 6px;
+    color: var(--button-text-color);
+    background-color: var(--button-color);
+    font-family: textFont;
     padding: 2px 12px;
-    font-size: 14px;
+    font-size: 15px;
+    vertical-align: middle;
 }
 
 .resultDivs {
     visibility: hidden;
+}
+
+.vertLine{
+    border-left: 2px solid var(--border-color);
+    height: 190px;
+    margin-top: 5px;
+    vertical-align: middle;
 }
 
 
@@ -21,14 +54,15 @@
 
 header {
     text-align: center;
+    color: white;
     padding: 5px;
     height: 150px;
     overflow: hidden;
+    background-color: #012437;
 }
 
 header img {
-    opacity: 0.35;
-    width: 100%;
+    opacity: 0.9;
 }
 
 header h1 {
@@ -48,6 +82,7 @@ header #upDescription {
 }
 
 
+
 /* end of Header*/
 
 
@@ -55,8 +90,9 @@ header #upDescription {
 
 #sequenceOfChordsBuilding {
     border-style: solid;
+    border-color: var(--border-color);
     border-radius: 1em;
-    height: 180px;
+    height: 200px;
     display: flex;
     justify-content: space-between;
     padding-left: 5%;
@@ -68,16 +104,17 @@ header #upDescription {
 }
 
 :root {
-    --selected-color: #106cc8;
-    --active-color: #1e86ed;
-    --disabled-color: rgb(179, 179, 179);
+    --selected-color: brown;
+    --disabled-color:grey;
 }
 
 .description {
     margin: 0;
-    font-family: 'Roboto', Arial;
-    font-style: oblique;
-    font-size: small;
+    margin-bottom:4px;
+    font-family: textFont;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .subContainer {
@@ -86,9 +123,9 @@ header #upDescription {
 }
 
 .linear-pillbar {
-    font-family: 'Roboto', Arial;
+    font-family: textFont;
     display: flex;
-    border: 1px solid var(--selected-color);
+    border: 1px solid var(--border-color);
     position: relative;
     border-radius: 3px;
 }
@@ -105,6 +142,7 @@ header #upDescription {
     border-right: 1px solid var(--selected-color);
     color: var(--selected-color);
     cursor: pointer;
+    background:white;
 }
 
 .option :last-child {
@@ -121,11 +159,11 @@ header #upDescription {
 }
 
 .disabled {
-    color: rgb(182, 182, 182);
+    color: var(--disabled-color);
 }
 
 #sequenceCtrl {
-    padding-top: 30px;
+    padding-top: 20px;
     text-align: center;
 }
 
@@ -134,34 +172,52 @@ header #upDescription {
 }
 
 #labelPrinting{
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: bold;
-    margin:0.1em;
+    margin:0.3em;
+    margin-bottom: 0.5em;
 }
 
 #chordCtrl{
     padding:0.2em;
     border-style: solid;
+    border-color: var(--border-color);
+    border-radius: 0.5em;
+    border-width: 0.15em;
+}
+
+#sequenceList{
+    padding:0.2em;
+    border-style: solid;
+    border-color: var(--border-color);
     border-radius: 0.5em;
     border-width: 0.15em;
 }
 
 #sequencePrinting {
-    padding-top: 40px;
+    padding-top: 30px;
     text-align: center;
-    width: 20%;
+    width: 25%;
 }
 
 #finalButtons {
-    padding-top: 70px;
+    padding-top: 30px;
 }
 
 #finalButtons .button {
     margin-top: 8px;
 }
 
+#goButton{
+    margin-top:25px;
+    width:100px;
+    height:40px;
+}
+
 .button {
     display: flex;
+    font-family: textFont;
+    vertical-align: middle;
     align-items: center;
     justify-content: center;
 }
@@ -174,8 +230,10 @@ header #upDescription {
 
 #sheet {
     border-style: solid;
+    border-color: var(--border-color);
     border-radius: 1em;
     height: 200px;
+    background-color:white;
 }
 
 .ctrl {
@@ -236,10 +294,11 @@ svg {
 }
 
 #triangle {
-    border-left: 10px solid rgb(19, 3, 109);
+    border-left: 10px solid var(--button-text-color);
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .can_be_pushed {
@@ -258,11 +317,16 @@ svg {
 
 #keyboard {
     border-style: solid;
+    border-color: var(--border-color);
     border-radius: 1em;
 }
 
 #labelKeyboard {
-    padding-left: 2em;
+    padding-left: 1em;
+    padding-right: 2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0.5em;
 }
 
 

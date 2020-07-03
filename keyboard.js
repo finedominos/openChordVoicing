@@ -99,7 +99,7 @@ function printChordOnKeyboard(chord) {
         }
 
         context_keys.rect(x, y, keywidth, y1);
-        context_keys.fillStyle = "red";
+        context_keys.fillStyle = "darkred";
         context_keys.fill();
     });
     //Remembering the last chord
