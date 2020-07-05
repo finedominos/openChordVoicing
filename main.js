@@ -283,9 +283,9 @@ document.getElementById("goButton").onclick = function () {
         nextButton.disabled = false;
     }
 
-
-    printChordOnKeyboard(voicingSequence[0]);    // from script keyboard.js
-    labelKeyboard.innerHTML = chordCollection[0]["print"];
+    printingIndex = 0;
+    printChordOnKeyboard(voicingSequence[printingIndex]);    // from script keyboard.js
+    labelKeyboard.innerHTML = chordCollection[printingIndex]["print"];
 
     // console.log("shuffledPosList: ", shuffledPosList);
     // console.log("chordPosList: ", chordsPosList);
