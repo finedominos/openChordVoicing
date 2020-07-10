@@ -35,21 +35,16 @@ function play_chord(chord) {
     }
 }
 
-const button_list = [audio_button1, audio_button2];
 //the button must not be pushed again during the playing, so cursor is changed to "waiter"
 function wait_to_push(disable) {
     if (disable == 1) {
-        for (var i in button_list) {
-            button_list[i].classList.remove("can_not_be_pushed");
-            button_list[i].classList.add("can_be_pushed");
-        }
+        audio_button1.disabled = false;
+        audio_button2.disabled = false;
         console.log("...finished playing.")
     }
     if (disable == 0) {
-        for (var i in button_list) {
-            button_list[i].classList.remove("can_be_pushed");
-            button_list[i].classList.add("can_not_be_pushed");
-        }
+        audio_button1.disabled = true;
+        audio_button2.disabled = true;
     }
 }
 

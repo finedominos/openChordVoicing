@@ -36,7 +36,15 @@ body{
     padding: 2px 12px;
     font-size: 15px;
     vertical-align: middle;
+    cursor: pointer;
 }
+
+.button button:disabled,.button button[disabled]{
+  background-color: #cccccc;   
+  color: #666666;
+  cursor: auto;
+}
+
 
 .resultDivs {
     visibility: hidden;
@@ -300,14 +308,6 @@ svg {
     border-bottom: 9px solid transparent;
     display: inline-block;
     vertical-align: middle;
-}
-
-.can_be_pushed {
-    cursor: pointer;
-}
-
-.can_not_be_pushed {
-    pointer-events: none;
 }
 
 
