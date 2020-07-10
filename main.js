@@ -2,6 +2,7 @@ console.log("loaded");
 
 var vueCollection = [];
 var chordCollection = [];
+var voicingSequence = [];
 dropChosen = '';
 printingIndex = 0;    // index of the chord printed on the keyboard
 
@@ -267,7 +268,7 @@ document.getElementById("goButton").onclick = function () {
         alert('Add at least one chord.');
         return;
     }
-    voicingSequence = naive(chordCollection, dropChosen); // from script naive.js   //WARNING : global variable.
+    voicingSequence = naive(chordCollection, dropChosen); // from script naive.js
     
     var resultDivs = document.getElementsByClassName("resultDivs");
     Array.prototype.filter.call(resultDivs, function(element){
@@ -311,7 +312,7 @@ document.getElementById("nextButton").onclick = function () {
     }
 };
 
-// PREVIOUS BUTTON (TEMPORARY)
+// PREVIOUS BUTTON
 document.getElementById("previousButton").onclick = function () {
     if (voicingSequence) {
         printingIndex -= 1
@@ -323,6 +324,16 @@ document.getElementById("previousButton").onclick = function () {
         previousButton.disabled = true;
     }
 };
+
+// AUDIO BUTTONS
+
+document.getElementById("audio_button1").onclick = function () {
+    play_sheet_button()              // from script audio.js
+}
+
+document.getElementById("audio_button2").onclick = function () {
+    play_keyboard_button()              // from script audio.js
+}
 
 
 

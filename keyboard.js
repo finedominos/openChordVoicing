@@ -1,4 +1,4 @@
-var lastChordPrinted = null;
+var printedChord = null;
 
 //Initializing two canvases: one for the keyboard and another for the marked keys
 let canvas = document.getElementById("canvasKeyboard");
@@ -21,8 +21,8 @@ window.onresize = function () {
     canvas.width = 0.782 * window.innerWidth;
     canvas_keys.width = canvas.width;
     //Each time the window gets resized, the keys of the last chord get marked again
-    if(this.lastChordPrinted != null){
-        printChordOnKeyboard(lastChordPrinted) 
+    if(this.printedChord != null){
+        printChordOnKeyboard(printedChord) 
     }
 }
 
@@ -103,5 +103,5 @@ function printChordOnKeyboard(chord) {
         context_keys.fill();
     });
     //Remembering the last chord
-    lastChordPrinted = chord;
+    printedChord = chord;
 }
