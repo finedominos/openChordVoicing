@@ -1,6 +1,6 @@
 //***********************************AUDIO FUNCTION*****************************************//
 
-var time_per_chord = 3100; //ms
+var time_per_chord = 3500; //ms
 
 //plays the sequence of chords printed on the sheet
 function play_sheet_button() {
@@ -11,7 +11,7 @@ function play_sheet_button() {
 
 //plays the chord printed on the keyboard
 function play_keyboard_button() {
-    key_englishNotation = num_to_note([printedChord]);  //printedChord availale from keyboard.js
+    key_englishNotation = num_to_note([printedChord]); //printedChord availale from keyboard.js
     console.log("Playing the chord printed on keyboard... ")
     wait_to_push(0);
     play_chord(key_englishNotation[0]);
