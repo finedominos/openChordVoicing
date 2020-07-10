@@ -70,37 +70,52 @@ const LinearPillbar = {
             } else if (!option.group) {
                 Vue.set(option, 'selected', !option.selected);
             }
-            //ANDRIANA TRYING TO DISABLE OPTIONS :O
-            for (let otherOption of this.options) {
-                    if (otherOption.name == 'b'){
-                        if(option.name=='C' || option.name == 'F'){
-                            Vue.set(otherOption, 'disabled', true);
-                            console.log("b is disabled");
+            //Disabling options for root/alt combinations
+            this.options.forEach(element => {
+                if (element.selected){
+                    if (element.group == "root") {
+                        for (let otherOption of this.options){
+                            if(otherOption.group == "alt") {
+                                if (otherOption.name == "b" && (element.name=="C" || element.name == "F")){
+                                    Vue.set(otherOption, 'disabled', true);
+                                    console.log("b is disabled");
+                                    break;
+                                }
+                                else Vue.set(otherOption, "disabled", false);
+                                if (otherOption.name == "#" && (element.name=="B" || element.name == "E")){
+                                    Vue.set(otherOption, 'disabled', true);
+                                    console.log("otherOption:" + otherOption.name);
+                                    console.log("# is disabled");
+                                }
+                                else Vue.set(otherOption, "disabled", false);
+                            }
                         }
-                        else Vue.set(otherOption, 'disabled', false);
                     }
-                    if (otherOption.name == '#'){
-                        if(option.name=='B' || option.name == 'E'){
-                            Vue.set(otherOption, 'disabled', true);
-                            console.log("# is disabled");
+                    if (element.group == "alt") {
+                        for (let otherOption of this.options){
+                            if(otherOption.group == "root") {
+                                if (element.name=="b"){
+                                    if (otherOption.name == "C" || otherOption.name == "F"){
+                                        Vue.set(otherOption, 'disabled', true);
+                                        console.log("C and F is disabled");
+                                    }
+                                    else Vue.set(otherOption, "disabled", false);
+                                }
+                                if (element.name=="#"){
+                                    if (otherOption.name == "E" || otherOption.name == "B"){
+                                        Vue.set(otherOption, 'disabled', true);
+                                        console.log("E and B is disabled");
+                                    }
+                                    else Vue.set(otherOption, "disabled", false);
+                                }
+                                if (element.name=="♮"){
+                                    Vue.set(otherOption, "disabled", false);
+                                }
+                            }
                         }
-                        else Vue.set(otherOption, 'disabled', false);
                     }
-                    if (otherOption.name == 'C' || otherOption.name == 'F'){
-                        if(option.name=='b'){
-                            Vue.set(otherOption, 'disabled', true);
-                            console.log("C and F are disabled");
-                        }
-                        else Vue.set(otherOption, 'disabled', false);
-                    }
-                    if (otherOption.name == 'B' || otherOption.name == 'E'){
-                        if(option.name=='#'){
-                            Vue.set(otherOption, 'disabled', true);
-                            console.log("B and E are disabled");
-                        }
-                        else Vue.set(otherOption, 'disabled', false);
-                    }
-            }
+                }  
+            });
         },
     },
     propsData: {
