@@ -5,7 +5,7 @@
 ## Introduction
 This application is the result of a joint project for two courses : Advanced Coding Tools & Methodologies and Computer Music Representation & Models. Our initial motivation was to help piano players to find voicings to their chords, since a musician doesn't always have access to a sheet. Sometimes, the musician has only at his disposal a sequence of the chords' names, and he might want to look for voicings ideas, or simply for a correct way to play chords he doesn't know yet. Open Chord Voicing has been designed to provide voicing suggestions for any sequence of chords, in the form of a sheet, an audio content and a mapping of the piano keys to be pressed.
 
-![Screenshot](input_page.PNG)
+![Screenshot](images_readme/input_page.PNG)
 > Welcome page of the application
 
 ## User interface
@@ -20,16 +20,16 @@ The second and the third block appear when the user clicks on 'go'. They provide
 
 #### - **The sheet**
 The sheet music is managed by the module sheet.js, and is then printed in the second block.
-![Screenshot](sheet_page.PNG)
+![Screenshot](images_readme/sheet_page.PNG)
 
 #### - **The piano keys**
 The piano keyboard is managed by the module keyboard.js, and is then printed in the third block. The keys to be pressed are colored in red, and the user can navigate through the chords by clicking on the next/previous buttons.
-![Screenshot](keyboard_page.PNG)
+![Screenshot](images_readme/keyboard_page.PNG)
 
 #### - **The audio content**
 The user can listen to the audio rendering of the voicing by clicking on a play button, either for a single chord or for the whole sequence. The playing is managed by audio.js, that picks among the available mp3 files, each corresponding to one of the 88 notes of a piano. 
 
-![Screenshot](Capture_page.PNG)
+![Screenshot](images_readme/Capture_page.PNG)
 > Main page appears when the user clicks on "Go"
 
 ## Files

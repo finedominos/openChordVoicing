@@ -26,7 +26,7 @@ window.onresize = function () {
     }
 }
 
-img.src = "pianoKeyboard88keys.png";
+img.src = "images/pianoKeyboard88keys.png";
 
 
 //Marking the chord notes on the keyboard
