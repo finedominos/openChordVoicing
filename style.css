@@ -6,7 +6,7 @@
 :root {
     /*--main-bg-color: rgb(255,161,35);*/
     /*--main-bg-color: #57b252;*/
-    --main-bg-color: rgb(255, 181, 45);
+    --main-bg-color: rgb(255, 210, 65);
     --button-color: #012437;
     --button-text-color: white;
     --border-color: rgb(18, 18, 18);
@@ -66,11 +66,11 @@ body {
 
 header {
     text-align: center;
-    color: white;
+    color:white;
     padding: 5px;
     height: 150px;
     overflow: hidden;
-    background-color: #012437;
+    background-color: var(--button-color);
     min-width: calc(var(--min-width) + 200px);
 }
 
