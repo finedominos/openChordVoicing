@@ -1,15 +1,17 @@
 /* STYLE */
 
+
 /* COLORS */
-:root{
+
+:root {
     /*--main-bg-color: rgb(255,161,35);*/
     /*--main-bg-color: #57b252;*/
-    --main-bg-color:  rgb(255,181,45);
-    --button-color:  #012437;
+    --main-bg-color: rgb(255, 181, 45);
+    --button-color: #012437;
     --button-text-color: white;
-    --border-color: rgb(18,18,18);
+    --border-color: rgb(18, 18, 18);
     /*--yellow-color: #f3af05;*/
-    --yellow-color: rgb(255,181,45);
+    --yellow-color: rgb(255, 181, 45);
 }
 
 @font-face {
@@ -17,9 +19,9 @@
     src: url("Lato-Regular.ttf");
 }
 
-body{
-    background-color:var(--main-bg-color);
-    font-family:textFont;
+body {
+    background-color: var(--main-bg-color);
+    font-family: textFont;
 }
 
 .principalDiv {
@@ -39,18 +41,18 @@ body{
     cursor: pointer;
 }
 
-.button button:disabled,.button button[disabled]{
-  background-color: #cccccc;   
-  color: #666666;
-  cursor: auto;
+.button button:disabled,
+.button button[disabled] {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: auto;
 }
-
 
 .resultDivs {
     visibility: hidden;
 }
 
-.vertLine{
+.vertLine {
     border-left: 2px solid var(--border-color);
     height: 190px;
     margin-top: 5px;
@@ -91,7 +93,6 @@ header #upDescription {
 }
 
 
-
 /* end of Header*/
 
 
@@ -114,12 +115,12 @@ header #upDescription {
 
 :root {
     --selected-color: brown;
-    --disabled-color:grey;
+    --disabled-color: grey;
 }
 
 .description {
     margin: 0;
-    margin-bottom:4px;
+    margin-bottom: 4px;
     font-family: textFont;
     font-size: 15px;
     font-weight: bold;
@@ -151,7 +152,7 @@ header #upDescription {
     border-right: 1px solid var(--selected-color);
     color: var(--selected-color);
     cursor: pointer;
-    background:white;
+    background: white;
 }
 
 .option :last-child {
@@ -176,27 +177,27 @@ header #upDescription {
     text-align: center;
 }
 
-#chosenChord{
-    margin:0.5em;
+#chosenChord {
+    margin: 0.5em;
 }
 
-#labelPrinting{
+#labelPrinting {
     font-size: 1.3em;
     font-weight: bold;
-    margin:0.3em;
+    margin: 0.3em;
     margin-bottom: 0.5em;
 }
 
-#chordCtrl{
-    padding:0.2em;
+#chordCtrl {
+    padding: 0.2em;
     border-style: solid;
     border-color: var(--border-color);
     border-radius: 0.5em;
     border-width: 0.15em;
 }
 
-#sequenceList{
-    padding:0.2em;
+#sequenceList {
+    padding: 0.2em;
     border-style: solid;
     border-color: var(--border-color);
     border-radius: 0.5em;
@@ -217,10 +218,10 @@ header #upDescription {
     margin-top: 8px;
 }
 
-#goButton{
-    margin-top:25px;
-    width:100px;
-    height:40px;
+#goButton {
+    margin-top: 25px;
+    width: 100px;
+    height: 40px;
 }
 
 .button {
@@ -242,7 +243,7 @@ header #upDescription {
     border-color: var(--border-color);
     border-radius: 1em;
     height: 200px;
-    background-color:white;
+    background-color: white;
 }
 
 .ctrl {
@@ -338,7 +339,7 @@ svg {
     top: 60%;
     left: 40%;
     width: 35em;
-    height: 25em;
+    height: 18em;
     margin-left: -10em;
     /*set to a negative number 1/2 of your width*/
     border: 1px solid #ccc;
