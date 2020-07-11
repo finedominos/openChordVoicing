@@ -12,6 +12,7 @@
     --border-color: rgb(18, 18, 18);
     /*--yellow-color: #f3af05;*/
     --yellow-color: rgb(255, 181, 45);
+    --min-width: 750px;
 }
 
 @font-face {
@@ -28,6 +29,7 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 40px;
+    min-width: var(--min-width);
 }
 
 .button button {
@@ -69,6 +71,7 @@ header {
     height: 150px;
     overflow: hidden;
     background-color: #012437;
+    min-width: var(--min-width);
 }
 
 header img {
@@ -343,8 +346,10 @@ svg {
     margin-left: -10em;
     /*set to a negative number 1/2 of your width*/
     border: 1px solid #ccc;
+    border-radius: 0.4em;
     background-color: #f3f3f3;
     z-index: -1;
+    box-shadow:2px 2px 10px gray;
 }
 
 #noResults p {
