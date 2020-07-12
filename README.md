@@ -66,3 +66,5 @@ Bank of piano notes in the mp3 format, from octave n°2 to octave n°5.
 Clément Jameau  
 Aliette Ravillion  
 Andriana Takic  
+
+[Licensed under the Non-Profit Open Software License version 3.0](https://tldrlegal.com/license/non-profit-open-software-license-3.0-(nposl-3.0))

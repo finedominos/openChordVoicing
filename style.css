@@ -4,7 +4,7 @@
 /* COLORS */
 
 :root {
-    --main-bg-color: rgb(255, 210, 65);
+    --main-bg-color: rgb(255, 185, 45);
     --button-color: #012437;
     --button-text-color: white;
     --border-color: rgb(30,30,30);
@@ -358,4 +358,10 @@ svg {
 #noResults p {
     font-style: italic;
     text-align: justify;
+}
+
+footer{
+    font-size: 0.68em;
+    padding-top: 35px;
+    text-align: center;
 }
