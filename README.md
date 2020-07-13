@@ -14,7 +14,7 @@ https://youtu.be/LDb9TR8V0JI
 ## The algorithm
 The input of the algorithm is the user's chord sequence, while the outputs are in the form of the music sheet, the audio playback, and the piano keyboard.
 
-![Screenshot](images_readme/InputOutput.PNG)
+![Screenshot](images_readme/InputOutput.png)
 
 ## User interface
 The user interface is a simple html page divided into 3 blocks. The first block is dedicated to the user's input, while the two others print the sheet, the piano keyboard and enable the audio playback.
